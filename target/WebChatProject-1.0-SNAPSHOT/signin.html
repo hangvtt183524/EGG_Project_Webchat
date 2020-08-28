@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signin</title>
+    <link rel="stylesheet" href="signin.css">
+</head>
+<body>
+    <div class="total">
+        <div class="login">
+            <h1>Sign in</h1>
+            <hr><br>
+            <form action="SigninServlet" method="post">
+                <label>Email</label><br>
+                <input type="text" id="email" name="email" placeholder="Enter your email"><br>
+                <span id="errorEmail"></span><br>
+                <label>Password:</label><br>
+                <input type="password" id="password" name="password" placeholder="Enter your password"><br>
+                <span id="errorPassword"></span><br>
+                <input type="submit" id="submit" value="LOGIN">
+            </form>
+            <div class="checkbox">
+                <input type="checkbox">
+                <p>remember me</p>
+            </div>
+            <a href="index.html" class="left">Sign up</a>
+            <a href="" class="right">forgot your password?</a>
+        </div>
+        <div class="img">
+            <img src="22.png" alt="">
+            </div>
+    </div>
+        
+</body>
+</html>

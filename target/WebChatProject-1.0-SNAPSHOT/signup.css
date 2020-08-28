@@ -1,0 +1,114 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Aug 28, 2020, 8:31:14 PM
+    Author     : HANG.VTT183524
+*/
+body{
+    font-family: sans-serif;
+    background-color: rgb(195, 195, 195);
+}
+
+.signup{
+    display: flex;
+}
+
+.signup .image{
+    width: 50%;
+    height: 100%;
+}
+
+.signup .image img{
+    width: 700px;
+    height: 700px;
+}
+
+.signup .create{
+    width: 350px;
+    height: 600px;
+    background-color: white;
+    border : 2px solid gray;
+    border-radius: 20px;
+    margin: 3%;
+}
+
+.signup .create .title{
+    display: flex;
+}
+
+.signup .create .title h1{
+    margin: 40px;
+}
+
+.signup .create .title p{
+    margin-top: 52px;
+    float : right;
+    margin-left:50px ;
+}
+
+
+.signup .create form{
+    margin-left: 40px;
+}
+
+
+.signup .create input{
+    width: 250px;
+    height: 30px;
+    border : 1px solid gray;
+    border-radius: 5px;
+    padding-left: 10px;
+    margin-top: 5px;
+}
+
+.signup .create .checkbox{
+    display: flex;
+}
+
+.signup .create .checkbox input{
+    width: 20px;
+    height: 20px;
+}
+
+.signup .create .checkbox p{
+    margin: 5px;
+}
+
+a{
+    text-decoration: none;
+    color:rgb(29, 188, 228) ;
+   
+
+}
+
+label{
+    color: rgb(29, 188, 228);
+}
+
+.signup .create form input.submit{
+    background-color: rgb(43, 116, 199);
+    color: white;
+    border : none;
+    margin-top: 20px ;
+    width: 267px;
+}
+
+a:hover{
+    color: coral;
+    transition: 0.4s;
+}
+
+.signup .create form input.submit:hover{
+    background-color: turquoise;
+    transition: 0.4s;
+}
+
+span{
+    margin-left: 10px ;
+    color: red;
+    transition: 0.4s;
+}
+

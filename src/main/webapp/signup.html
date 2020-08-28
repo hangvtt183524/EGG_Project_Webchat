@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup</title>
+    <link rel="stylesheet" href="signup.css">
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function(){
+                
+                $('#submit').click(function(){
+                var firstname = $('#firstName').val();
+                var lastname = $('#lastName').val();
+                var email = $('#email').val();
+                var password = $('#password').val();
+                var confPassword = $('#confPassword').val();
+                $.ajax({
+                        type: 'POST',
+                        data: {firstname: firstname,
+                            lastname: lastname,
+                        password: password,
+                        email: email,
+                        confPassword: confPassword},
+                        url: 'signupServlet',
+                        success: function(result){
+                            switch(result)
+                            {
+                                case "1": $('#errorFirstName').html("FirstName không được để trống");
+                                          $('#errorLastName').html("");
+                                          $('#errorEmail').html("");
+                                          $('#errorPassword').html("");
+                                          $('#errorConfPassword').html("");
+                                    break;
+                                case "2": $('#errorLastName').html("LastName không được để trống");
+                                          $('#errorEmail').html("");
+                                          $('#errorPassword').html("");
+                                          $('#errorConfPassword').html("");
+                                          $('#errorFirstName').html("");
+                                    break;  
+                                case "3": $('#errorEmail').html("Email không được để trống");
+                                    $('#errorPassword').html("");
+                                    $('#errorConfPassword').html("");
+                                    $('#errorFirstName').html("");
+                                    $('#errorLastName').html("");
+                                    break;
+                                case "4": $('#errorPassword').html("Password không được để trống");
+                                    $('#errorEmail').html("");
+                                    $('#errorConfPassword').html("");
+                                    $('#errorFirstName').html("");
+                                    $('#errorLastName').html("");
+                                    break;
+                                case "5": $('#errorConfPassword').html("Confirm password không được để trống");
+                                    $('#errorEmail').html("");
+                                    $('#errorPassword').html("");
+                                    $('#errorFirstName').html("");
+                                    $('#errorLastName').html("");
+                                    break;
+                                case "6": $('#errorConfPassword').html("Confirm sai");
+                                    $('#errorEmail').html("");
+                                    $('#errorPassword').html("");
+                                    $('#errorFirstName').html("");
+                                    $('#errorLastName').html("");
+                                    break;
+                                case "7": $('#errorEmail').html("Email đã được sử dụng!");
+                                    $('#errorFirstName').html("");
+                                    $('#errorPassword').html("");
+                                    $('#errorConfPassword').html("");
+                                    $('#errorLastName').html("");
+                                    break;
+                                    
+                            default: $('#message').html("Signup successfully!");
+                                    $('#errorEmail').html("");
+                                    $('#errorPassword').html("");
+                                    $('#errorConfPassword').html("");
+                                    $('#errorFirstName').html("");
+                                    $('#errorLastName').html("");
+                                    window.location.replace("signin.html");
+                            }
+                        }
+                    });
+                });
+            });
+        </script>
+</head>
+<body>
+    <div class="signup">
+        <div class="image">
+            <img src="image/22.png" alt="">
+        </div>
+        <div class="create">
+            <div class="title">
+                <h1>Sign up</h1>
+                <p>or <a href="signin.html">sign in</a></p>
+            </div>
+            <form id="form-signup">
+                <label>FirstName:</label><br>
+                <input type="text" id="firstName" placeholder="Enter your FirstName" name="firstname"><br>
+                <span id="errorFirstName"></span><br>
+                <label>LastName:</label><br>
+                <input type="text" id="lastName" placeholder="Enter your LastName" name="lastname" ><br>
+                <span id="errorLastName"></span><br>
+                <label>Email:</label><br>
+                <input type="text" id="email" name="email" placeholder="Enter your email"><br>
+                <span id="errorEmail"></span><br>
+                <label>Password:</label><br>
+                <input type="password" id="password" placeholder="Enter your password" name="password"><br>
+                <span id="errorPassword"></span><br>
+                <label>Confirm Password:</label><br>
+                <input type="password" id="confPassword" placeholder="Enter your password" name="confPassword"><br>
+                <span id="errorConfPassword"></span><br>
+                <div class="checkbox">
+                    <input type="checkbox">
+                    <p>I agree to <a href="">EggClub terms</a></p>
+                </div>
+                <span id="message"></span><br>
+                <input type="button" id="submit" value="Sign up">
+            </form>
+        </div>
+    </div>    
+</body>
+</html>
+

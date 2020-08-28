@@ -1,0 +1,105 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Aug 21, 2020, 2:12:28 PM
+    Author     : THANH
+*/
+body{
+    font-family: sans-serif;
+    background-color: rgb(195, 195, 195);
+}
+
+.total{
+    display:flex;
+}
+
+.login {
+    width: 350px;
+    height: 500px;
+    background-color: white;
+    border: 2px solid gray; 
+    border-radius: 10px;
+    margin-left: 10%;
+    margin-top: 5%;
+}
+
+.login h1{
+    margin: 40px;
+
+}
+
+.login label{
+    color: rgb(21, 184, 224);
+    margin-left:40px ;
+}
+
+.login input{
+    width: 250px;
+    height: 30px;
+    border-radius: 5px;
+    border: 1px solid gray;
+    padding-left: 10px;
+    margin-left: 40px;
+    
+    margin-top:5px;
+}
+
+.login .checkbox{
+    display: flex;
+}
+
+.login .checkbox input{
+    height: 20px;
+    width: 20px;
+}
+
+.login .checkbox p{
+    margin: 5px;
+}
+
+.login form input.submit{
+    border: none;
+    background-color: rgb(43, 116, 199);
+    color: white;
+    width: 267px;
+}
+
+a{
+    text-decoration: none;
+}
+
+a.left{
+    margin-left: 40px ;
+}
+
+a.right{
+    float: right;
+    margin-right: 30px;
+}
+
+a:hover{
+    color:coral;
+    transition: 0.5s;
+}
+
+.login form input.submit:hover{
+    border: none;
+    background-color: rgb(19, 221, 194);
+    transition: 0.5s;
+}
+
+.img img{
+    width: 700px;
+    height: 700px;
+    margin-left: 100px;
+}
+
+span{
+    margin-left: 45px ;
+    color: red;
+    transition: 0.4s;
+}
+
