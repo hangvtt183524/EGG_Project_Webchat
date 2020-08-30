@@ -49,5 +49,6 @@
         <input type="button" value="Send" onclick="sendMessage();">
         <br>
         <div id="check"></div>
+        <a href="login?action=Logout">Logout</a>
     </body>
 </html>
