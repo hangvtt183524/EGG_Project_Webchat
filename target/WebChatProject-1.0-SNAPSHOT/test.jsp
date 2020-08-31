@@ -12,14 +12,23 @@
         <title>Start Page</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <script type="text/javascript">
-            var test;
+            var listSocketConnected = new Map();
+            var roomName;
             var address;
             var websocket;
             function startChat(name)
             {
-            test = name;
-            address = "ws://localhost:8080/WebChatProject/chatroomEndpoint/" + test;
-            websocket = new WebSocket(address);
+            roomName = name;
+            
+            websocket = listSocketConnected.get(roomName);
+            
+            if(websocket == undefined)  
+            {
+                address = "ws://localhost:8080/WebChatProject/chatroomEndpoint/" + roomName;
+                websocket = new WebSocket(address);
+                listSocketConnected.set(roomName, websocket);
+            }
+            
             websocket.onmessage = function processMessage(message)
             {
                 var jsonData = JSON.parse(message.data);
