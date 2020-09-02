@@ -1,0 +1,148 @@
+<link href="libs/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="libs/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<!DOCTYPE html>
+<html>
+	<head>
+        <title>Chat</title>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="libs/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+		<link rel="stylesheet" href="libs/bootstrap/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+		<script src="libs/jquery/3.3.1/jquery.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="libs/jquery/3.1.5/jquery.mCustomScrollbar.min.css">
+		<link rel="stylesheet" href="chat.css">
+		<script type="text/javascript" src="libs/jquery/3.1.5/jquery.mCustomScrollbar.min.js"></script>
+
+	</head>
+	<!--Coded With Love By Mutiullah Samim-->
+    <body>
+<div class="container-fluid bootstrap snippets bootdeys">
+    <div class="row">
+        <div class="col-md-12">
+            <!-- start:chat room -->
+            <div class="box">
+                <div class="chat-room">
+                <!-- start:aside kiri chat room -->
+                <aside class="kiri-side">
+                    <div class="user-head">
+                        <i class="fa fa-comments-o"></i>
+                        <h3 id="username">Insert Username</h3>
+                    </div>
+                    <ul class="chat-list">
+                        <li class="">
+                            <a class="lobby" href="#lobby.html">
+                                <h4>
+                                    <i class="fa fa-list"></i>
+                                    Lobby
+                                </h4>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="chat-list chat-group-list">
+                        <li>
+                            <a href="#chat_room.html">
+                                <i class="fa fa-comments-o"></i>
+                                <span>Marketing</span>
+                            </a>
+                        </li>
+                        <li class="active">
+                            <a href="#chat_room.html">
+                                <i class="fa fa-comments-o"></i>
+                                <span>Water Cooler</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#chat_room.html">
+                                <i class="fa fa-comments-o"></i>
+                                <span>Design Lounge</span>
+                            </a>
+                        </li>
+                    </ul>
+                </aside>
+                <!-- end:aside kiri chat room -->
+                
+                <!-- start:aside tengah chat room -->
+                <aside class="tengah-side">
+                    <div class="chat-room-head">
+                        <h3 id="insert-roomName">Insert RoomName</h3>
+                    		
+                            <span class="video_cam"><i class="fa fa-video-camera"></i></span>
+                            <span class="video_cam"><i class="fa fa-phone"></i></span>
+                        
+                        <form action="#" class="pull-right position">
+                            <input type="text" placeholder="Search" class="form-control search-btn ">
+                        </form>
+                    </div>
+                <div class="chat123">
+                    <div class="d-flex justify-content-start mb-4">
+                        <div class="img_cont_msg">
+                            <img src="so7.png" class="rounded-circle user_img_msg">
+                        </div>
+                        <div class="msg_cotainer">
+                            Hi, how are you samim?
+                            <span class="msg_time">8:40 AM, Today</span>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-end mb-4">
+                        <div class="msg_cotainer_send">
+                            Hi Khalid i am good tnx how about you?
+                            <span class="msg_time_send">8:55 AM, Today</span>
+                        </div>
+                    </div>
+                    
+                </div>
+
+                    <footer>
+                        <div class="chat-txt">
+                            <input type="text" class="form-control">
+                        </div>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-white" data-original-title="" title=""><i class="fa fa-meh-o"></i></button>
+                            <button type="button" class="btn btn-white" data-original-title="" title=""><i class=" fa fa-paperclip"></i></button>
+                        </div>
+                        <button class="btn btn-danger" data-original-title="" title="">Send</button>
+                    </footer>
+                </aside>
+                <!-- end:aside tengah chat room -->
+    
+                <!-- start:aside kanan chat room -->
+                <aside class="kanan-side">
+                    <div class="user-head">
+						<img src="so9.png" class="rounded-circle user_img_msg">
+                        <a href="##" class="chat-tools btn-success"><i class="fa fa-cog"></i> </a>
+                        <a href="##" class="chat-tools btn-key"><i class="fa fa-key"></i> </a>
+                    </div>
+                    <div class="invite-row">
+                        <h4 class="pull-left">People</h4>
+                    </div>
+                    <ul class="chat-available-user chat-group-list">
+                        <li>
+                            <a href="#chat-room.html">
+                                <i class="fa fa-circle text-success"></i>
+                                Jonathan Smith
+                                <span class="text-muted">3h:22m</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#chat-room.html">
+                                <i class="fa fa-circle text-success"></i>
+                                Jhone Due
+                                <span class="text-muted">1h:2m</span>
+                            </a>
+                        </li>
+                        
+                    </ul>
+                </aside>
+                <!-- end:aside kanan chat room -->
+    
+                </div>
+            </div>
+            <!-- end:chat room -->
+        </div>
+    </div>
+    </div>
+    <script src="chung.js"></script>
+</body>
+</html>
