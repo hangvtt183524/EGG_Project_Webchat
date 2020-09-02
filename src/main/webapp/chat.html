@@ -14,7 +14,47 @@
 		<link rel="stylesheet" type="text/css" href="libs/jquery/3.1.5/jquery.mCustomScrollbar.min.css">
 		<link rel="stylesheet" href="chat.css">
 		<script type="text/javascript" src="libs/jquery/3.1.5/jquery.mCustomScrollbar.min.js"></script>
-
+                <script type="text/javascript">
+            var listSocketConnected = new Map();
+            var room_id;
+            var address;
+            var websocket;
+            
+            var messageArea = document.getElementById("chat123");
+            
+            function startChat(id)
+            {
+            room_id = id;
+            
+            websocket = listSocketConnected.get(room_id);
+           // messagesTextArea.value = "";
+            if(websocket == undefined)  
+            {
+                address = "ws://localhost:8080/WebChatProject/chatroomEndpoint/" + room_id;
+                websocket = new WebSocket(address);
+                listSocketConnected.set(room_id, websocket);
+            }
+            
+            websocket.onmessage = function processMessage(message)
+            {
+                var jsonData = JSON.parse(message.data);
+                if (jsonData.message !== null) 
+                    {//messagesTextArea.value += jsonData.message + "\n";
+                        document.getElementById("chat123").innerHTML += "<div class=\"d-flex justify-content-end mb-4\">"
+                                                    + "<div class=\"msg_cotainer_send\">"
+                                                        + jsonData.message 
+                                                    + "</div>"
+                                                + "</div>";
+                    }
+            };
+        }
+            function sendMessage()
+            {
+                websocket.send(messageText.value);
+                messageText.value = "";
+                  
+            }
+        </script>
 	</head>
 	<!--Coded With Love By Mutiullah Samim-->
     <body>
@@ -42,19 +82,16 @@
                     </ul>
                     <ul class="chat-list chat-group-list">
                         <li>
-                            <a href="#chat_room.html">
-                                <i class="fa fa-comments-o"></i>
-                                <span>Marketing</span>
-                            </a>
+                            <button name="2" onclick="startChat(this.name)">Room 2</button>
                         </li>
                         <li class="active">
-                            <a href="#chat_room.html">
+                            <div id="2" onclick="startChat(this.id)">
                                 <i class="fa fa-comments-o"></i>
                                 <span>Water Cooler</span>
-                            </a>
+                            </div>
                         </li>
                         <li>
-                            <a href="#chat_room.html">
+                            <a>
                                 <i class="fa fa-comments-o"></i>
                                 <span>Design Lounge</span>
                             </a>
@@ -75,7 +112,7 @@
                             <input type="text" placeholder="Search" class="form-control search-btn ">
                         </form>
                     </div>
-                <div class="chat123">
+                <div class="chat123" id="chat123">
                     <div class="d-flex justify-content-start mb-4">
                         <div class="img_cont_msg">
                             <img src="so7.png" class="rounded-circle user_img_msg">
@@ -96,13 +133,13 @@
 
                     <footer>
                         <div class="chat-txt">
-                            <input type="text" class="form-control">
+                            <input type="text" class="form-control" id="messageText">
                         </div>
                         <div class="btn-group">
                             <button type="button" class="btn btn-white" data-original-title="" title=""><i class="fa fa-meh-o"></i></button>
                             <button type="button" class="btn btn-white" data-original-title="" title=""><i class=" fa fa-paperclip"></i></button>
                         </div>
-                        <button class="btn btn-danger" data-original-title="" title="">Send</button>
+                        <button class="btn btn-danger" data-original-title="" onclick="sendMessage();">Send</button>
                     </footer>
                 </aside>
                 <!-- end:aside tengah chat room -->
