@@ -69,5 +69,9 @@ public class User {
     {
         return this.username;
     }
+    public int getUserId()
+    {
+        return Integer.parseInt(this.user_id);
+    }
 }
 

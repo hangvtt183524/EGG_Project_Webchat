@@ -137,7 +137,7 @@ public class SigninServlet extends HttpServlet {
                     ckPassword.setMaxAge(3600);
                     response.addCookie(ckPassword);
             }
-            request.getRequestDispatcher("test.jsp").forward(request, response);
+            request.getRequestDispatcher("ttt.html").forward(request, response);
         }
         else  
         {
