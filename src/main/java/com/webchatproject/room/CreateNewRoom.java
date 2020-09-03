@@ -46,6 +46,7 @@ public class CreateNewRoom extends HttpServlet {
         ResultSet rs = ConnectDatabase.executeSql("select top 1 * from Chat_Room order by room_id desc;");
         try {
             if (rs.next()) room_id = rs.getString("room_id");
+            rs.close();
         } catch (SQLException ex) {
             Logger.getLogger(CreateNewRoom.class.getName()).log(Level.SEVERE, null, ex);
         }

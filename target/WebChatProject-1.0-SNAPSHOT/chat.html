@@ -13,6 +13,7 @@
 		<script src="libs/jquery/3.3.1/jquery.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="libs/jquery/3.1.5/jquery.mCustomScrollbar.min.css">
 		<link rel="stylesheet" href="chat.css">
+                <link rel="stylesheet" href="collapsible.css">
 		<script type="text/javascript" src="libs/jquery/3.1.5/jquery.mCustomScrollbar.min.js"></script>
                 <script type="text/javascript">
             var listSocketConnected = new Map();
@@ -78,36 +79,17 @@
                     </div>
                     <ul class="chat-list">
                         <li class="">
-                            <a id="lobby">
-                                <button id="collapsible">collapsible</button>
-                                <div id="content">
-                                        title: <input type="text">
+
+                                <button class="collapsible">Add New Room</button>
+                                <div class="content">
+                                        title: <textarea rows="1" cols="20" maxlength="20" id="roomName"></textarea>
+                                        <br>
+                                        <button id="buttonAdd">Add</button>
                                 </div>
-                            </a>
                         </li>
                     </ul>
-                    <script>
-                        var coll = document.getElementById("collapsible");
-                        var i;
-                        
-                          coll.addEventListener("click", function() {
-                            this.classList.toggle("active");
-                            var content = this.nextElementSibling;
-                            if (content.style.maxHeight){
-                              content.style.maxHeight = null;
-                            } else {
-                              content.style.maxHeight = content.scrollHeight + "px";
-                            } 
-                          });
-                        
-                        </script>
-                    <ul class="chat-list chat-group-list">
-                        <li>
-                            <a id="4" onclick="startChat(this.id);">
-                                <i class="fa fa-comments-o"></i>
-                                <span>Design Lounge</span>
-                            </a>
-                        </li>
+                    
+                    <ul class="chat-list chat-group-list" id="chat-list">
                     </ul>
                 </aside>
                 <!-- end:aside kiri chat room -->
@@ -192,6 +174,26 @@
         </div>
     </div>
     </div>
-    <script src="chung.js"></script>
+    <script type="text/javascript" src="collapsible.js"></script>
+    <script>
+            $(document).ready(function(){
+                $('#buttonAdd').click(function(){
+                    var roomName = $('#roomName').val();
+                    $.ajax({
+                        type: 'get',
+                        data: {roomName: roomName},
+                        url: 'createNewRoom',
+                        success: function(result){
+                            $('#chat-list').append("<li>"
+                                                      + "<a id=\"" + result + "\" onclick=\"startChat(this.id);\">"
+                                                           + "<i class=\"fa fa-comments-o\"></i>"
+                                                           + "<span>" + roomName + "</span>"
+                                                      + "</a>"
+                                                   + "</li>");
+                        }
+                    });
+                });
+            });
+        </script>
 </body>
 </html>
