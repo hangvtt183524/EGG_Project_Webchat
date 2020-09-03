@@ -78,22 +78,30 @@
                     </div>
                     <ul class="chat-list">
                         <li class="">
-                            <a class="lobby" id="3" onclick="startChat(this.id);">
-                                <h4>
-                  
-                                    <i class="fa fa-list"></i>
-                                    Lobby
-                                </h4>
+                            <a id="lobby">
+                                <button id="collapsible">collapsible</button>
+                                <div id="content">
+                                        title: <input type="text">
+                                </div>
                             </a>
                         </li>
                     </ul>
+                    <script>
+                        var coll = document.getElementById("collapsible");
+                        var i;
+                        
+                          coll.addEventListener("click", function() {
+                            this.classList.toggle("active");
+                            var content = this.nextElementSibling;
+                            if (content.style.maxHeight){
+                              content.style.maxHeight = null;
+                            } else {
+                              content.style.maxHeight = content.scrollHeight + "px";
+                            } 
+                          });
+                        
+                        </script>
                     <ul class="chat-list chat-group-list">
-                        <li class="active">
-                            <a id="2" onclick="startChat(this.id)">
-                                <i class="fa fa-comments-o"></i>
-                                <span>Water Cooler</span>
-                            </a>
-                        </li>
                         <li>
                             <a id="4" onclick="startChat(this.id);">
                                 <i class="fa fa-comments-o"></i>
@@ -119,7 +127,7 @@
                 <div class="chat123" id="chat123">
                     <div class="d-flex justify-content-start mb-4">
                         <div class="img_cont_msg">
-                            <img src="so7.png" class="rounded-circle user_img_msg">
+                            <img src="libs/image/so7.png" class="rounded-circle user_img_msg">
                         </div>
                         <div class="msg_cotainer">
                             Hi, how are you samim?
