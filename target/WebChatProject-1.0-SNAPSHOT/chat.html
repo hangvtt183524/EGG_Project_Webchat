@@ -21,7 +21,7 @@
             var websocket;
             
             var messageArea = document.getElementById("chat123");
-            
+            var text;
             function startChat(id)
             {
             room_id = id;
@@ -40,20 +40,26 @@
                 var jsonData = JSON.parse(message.data);
                 if (jsonData.message !== null) 
                     {//messagesTextArea.value += jsonData.message + "\n";
-                        document.getElementById("chat123").innerHTML += "<div class=\"d-flex justify-content-end mb-4\">"
-                                                    + "<div class=\"msg_cotainer_send\">"
+                        document.getElementById("chat123").innerHTML += "<div class=\"d-flex justify-content-start mb-4\">"
+                                                    + "<div class=\"msg_cotainer\">"
                                                         + jsonData.message 
                                                     + "</div>"
                                                 + "</div>";
+                        
                     }
             };
         }
             function sendMessage()
             {
                 websocket.send(messageText.value);
+                text = messageText.value;
+                document.getElementById("chat123").innerHTML += "<div class=\"d-flex justify-content-end mb-4\">"
+                                                    + "<div class=\"msg_cotainer_send\">"
+                                                        + text 
+                                                    + "</div>"
+                                                + "</div>";
                 messageText.value = "";
-                  
-            }
+                }
         </script>
 	</head>
 	<!--Coded With Love By Mutiullah Samim-->
@@ -72,8 +78,9 @@
                     </div>
                     <ul class="chat-list">
                         <li class="">
-                            <a class="lobby" href="#lobby.html">
+                            <a class="lobby" id="3" onclick="startChat(this.id);">
                                 <h4>
+                  
                                     <i class="fa fa-list"></i>
                                     Lobby
                                 </h4>
@@ -81,17 +88,14 @@
                         </li>
                     </ul>
                     <ul class="chat-list chat-group-list">
-                        <li>
-                            <button name="2" onclick="startChat(this.name)">Room 2</button>
-                        </li>
                         <li class="active">
-                            <div id="2" onclick="startChat(this.id)">
+                            <a id="2" onclick="startChat(this.id)">
                                 <i class="fa fa-comments-o"></i>
                                 <span>Water Cooler</span>
-                            </div>
+                            </a>
                         </li>
                         <li>
-                            <a>
+                            <a id="4" onclick="startChat(this.id);">
                                 <i class="fa fa-comments-o"></i>
                                 <span>Design Lounge</span>
                             </a>

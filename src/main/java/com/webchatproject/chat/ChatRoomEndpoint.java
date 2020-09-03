@@ -64,8 +64,13 @@ public class ChatRoomEndpoint {
         
         Set<Session> chatroomUsers = getChatroom(chatroom);
         Iterator<Session> irerator = chatroomUsers.iterator();
+        Session current;
         while (irerator.hasNext())
-                irerator.next().getBasicRemote().sendText(buildJsonData(username, message, chatroom));
+        {
+            current = irerator.next();
+            if (!current.equals(userSession))
+                 current.getBasicRemote().sendText(buildJsonData(message));
+        }
     }
 
     
@@ -84,9 +89,9 @@ public class ChatRoomEndpoint {
     
     }
     
-        private String buildJsonData(String username, String message, String chatroom)
+        private String buildJsonData(String message)
     {
-        JsonObject jsonObject = Json.createObjectBuilder().add("message", username + " " + chatroom+": "+ message).build();
+        JsonObject jsonObject = Json.createObjectBuilder().add("message",message).build();
         StringWriter stringWriter = new StringWriter();
         try (JsonWriter jsonWriter = Json.createWriter(stringWriter))
         {
