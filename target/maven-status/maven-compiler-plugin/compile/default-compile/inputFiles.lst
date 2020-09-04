@@ -2,6 +2,7 @@ D:\Code\Servlet\WebChatProject\src\main\java\com\webchatproject\register\SigninS
 D:\Code\Servlet\WebChatProject\src\main\java\com\webchatproject\room\CreateNewRoom.java
 D:\Code\Servlet\WebChatProject\src\main\java\com\webchatproject\chat\ChatRoomEndpoint.java
 D:\Code\Servlet\WebChatProject\src\main\java\com\webchatproject\connectdatabase\ConnectDatabase.java
+D:\Code\Servlet\WebChatProject\src\main\java\com\webchatproject\room\GetUserFromDB.java
 D:\Code\Servlet\WebChatProject\src\main\java\com\webchatproject\register\SignupServlet.java
 D:\Code\Servlet\WebChatProject\src\main\java\Model\User.java
 D:\Code\Servlet\WebChatProject\src\main\java\com\webchatproject\chat\ChatroomServerConfigurator.java

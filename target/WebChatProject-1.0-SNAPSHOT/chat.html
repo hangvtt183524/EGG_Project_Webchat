@@ -13,7 +13,7 @@
 		<script src="libs/jquery/3.3.1/jquery.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="libs/jquery/3.1.5/jquery.mCustomScrollbar.min.css">
 		<link rel="stylesheet" href="chat.css">
-                <link rel="stylesheet" href="collapsible.css">
+                <link rel="stylesheet" href="addnewroom.css">
 		<script type="text/javascript" src="libs/jquery/3.1.5/jquery.mCustomScrollbar.min.js"></script>
                 <script type="text/javascript">
             var listSocketConnected = new Map();
@@ -65,6 +65,32 @@
 	</head>
 	<!--Coded With Love By Mutiullah Samim-->
     <body>
+        <div id="add-new-room">
+        <div id="add-new-room-box">
+            <span id="close" onclick="hide()">&times;</span>
+            <p>Room Title</p>
+            <textarea placeholder="Room Title" style="width: 80%;" id="roomName"></textarea>
+            <br>
+            <p>Add Member</p>
+            <textarea id="myInput" style="width: 40%;" onclick="myFunction()" placeholder="Search for names.." onkeyup="myFunction1()"></textarea>
+            <span id="result"></span>
+            <br>
+            <div class="popup" id="popup">
+                <ul id="myPopup" class="popuptext">
+                   <!-- <li><a href="#" onclick="showResult(this)">Adele</a></li>
+                    <li><a href="#"  onclick="showResult(this)">Agnes</a></li>
+                  
+                    <li><a href="#"  onclick="showResult(this)">Billy</a></li>
+                    <li><a href="#" onclick="showResult(this)">Bob</a></li>
+                  
+                    <li><a href="#" onclick="showResult(this)">Calvin</a></li>
+                    <li><a href="#" onclick="showResult(this)">Christina</a></li>
+                    <li><a href="#" onclick="showResult(this)">Cindy</a></li>-->
+                  </ul>
+            </div>
+            <button id="buttonAdd">Add</button>
+        </div>
+    </div>
 <div class="container-fluid bootstrap snippets bootdeys">
     <div class="row">
         <div class="col-md-12">
@@ -79,13 +105,7 @@
                     </div>
                     <ul class="chat-list">
                         <li class="">
-
-                                <button class="collapsible">Add New Room</button>
-                                <div class="content">
-                                        title: <textarea rows="1" cols="20" maxlength="20" id="roomName"></textarea>
-                                        <br>
-                                        <button id="buttonAdd">Add</button>
-                                </div>
+                            <button id="addNewRoom" onclick="show(this)">Add New Room</button>
                         </li>
                     </ul>
                     
@@ -174,7 +194,7 @@
         </div>
     </div>
     </div>
-    <script type="text/javascript" src="collapsible.js"></script>
+    <script type="text/javascript" src="addnewroom.js"></script>
     <script>
             $(document).ready(function(){
                 $('#buttonAdd').click(function(){

@@ -1,4 +1,5 @@
 com\webchatproject\chat\ChatRoomEndpoint.class
+com\webchatproject\room\GetUserFromDB.class
 com\webchatproject\register\SignupServlet.class
 com\webchatproject\register\SigninServlet.class
 Model\User.class
