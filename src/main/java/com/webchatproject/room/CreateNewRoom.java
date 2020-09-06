@@ -24,7 +24,6 @@ import javax.servlet.http.HttpSession;
  *
  * @author HANG.VTT183524
  */
-@WebServlet("/createNewRoom")
 public class CreateNewRoom extends HttpServlet {
     
     @Override
@@ -52,6 +51,7 @@ public class CreateNewRoom extends HttpServlet {
         }
         
         ConnectDatabase.closeConnect();
+          
         out.print(room_id);
     }
 
@@ -66,7 +66,29 @@ public class CreateNewRoom extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+                response.setContentType("text/plain");
+        PrintWriter out = response.getWriter();
+        HttpSession session = request.getSession();
         
+        String list = (String) request.getParameter("list");
+        String[] member_id = list.split("\\s");
+        int i;
+        int room_id = 0;
+        
+        ConnectDatabase.connect();
+        ResultSet rs = ConnectDatabase.executeSql("select top 1 * from Chat_Room order by room_id desc;");
+        try {
+            if (rs.next()) room_id = Integer.parseInt(rs.getString("room_id"));
+            rs.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(CreateNewRoom.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        for (i=0; i< member_id.length; i++)
+        {
+            ConnectDatabase.insertIntoDatabase("insert into Participant values ('" + Integer.parseInt(member_id[i]) + "', " + room_id + ");");
+        }
+        //ConnectDatabase.closeConnect();
     }
 
     /**

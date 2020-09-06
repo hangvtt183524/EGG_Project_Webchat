@@ -97,7 +97,23 @@ body
     display: inline-block;
 }
 
-.chat-room-head .search-btn {
+.chat-room-head #search-container
+{
+    width: 13%;
+    background-color: black;
+    border: 2px solid red;
+    height: 50px;
+    position: absolute;
+    left: 60%;
+    top: 2%;
+}
+#list
+{
+    width: 100%;
+    background-color: blue;
+}
+
+.search-btn {
     width: 20px;
     -webkit-transition: all .3s ease;
     -moz-transition: all .3s ease;
@@ -107,12 +123,10 @@ body
     box-shadow: none;
     background: #01a6b2 url("../img/chat-search.png") no-repeat 12px 9px;
     padding:0 5px 0 35px;
-    margin-top: 2px;
     border: none;
-    color: #fff;
 }
 
-.chat-room-head .search-btn:focus {
+.search-btn:focus {
     width: 180px;
     box-shadow: none;
     -webkit-transition: all .3s ease;
@@ -122,7 +136,7 @@ body
     transition: all .3s ease;
     /*background: #01a6b2;*/
     font-weight: 300;
-    color: #fff;
+    color: black;
 }
 
 .chat-room-head .search-btn:focus::-moz-placeholder {

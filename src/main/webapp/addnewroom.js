@@ -4,36 +4,36 @@
  * and open the template in the editor.
  */
 
-
-function show() {
-            var addNewRoom = document.getElementById("add-new-room");
-            addNewRoom.style.visibility = "visible";
-            
-            var xhttp = new XMLHttpRequest() || ActiveXObject();
+document.getElementById("addNewRoom-text").addEventListener('keyup', 
+function(event) {
+    if (event.keyCode === 13)
+    {
+        var roomName = document.getElementById("addNewRoom-text").value;
+    var xhttp = new XMLHttpRequest() || ActiveXObject();
     //Bat su kien thay doi trang thai cuar request
     xhttp.onreadystatechange = function () {
         //Kiem tra neu nhu da gui request thanh cong
         if (this.readyState == 4 && this.status == 200) {
-            //In ra data nhan duoc
-            document.getElementById("myPopup").innerHTML += (this.responseText)
         }
     }
     //cau hinh request
-    xhttp.open('GET','GetUserFromDB?data=true',true);
+    xhttp.open('GET','CreateNewRoom?roomName=' + roomName,true);
     //gui request
     xhttp.send();
-        }
-
-        function hide()
-        {
-            var addNewRoom = document.getElementById("add-new-room");
-            addNewRoom.style.visibility = "hidden";
-            var popup = document.getElementById("myPopup");
+    }
+});
+        
+function hide()
+{
+    var addNewRoom = document.getElementById("add-new-room");
+    addNewRoom.style.visibility = "hidden";
+    var popup = document.getElementById("myPopup");
     popup.style.visibility = 'hidden';
-        }
-        function myFunction() {
-  var popup = document.getElementById("myPopup");
-  popup.style.visibility = 'visible';
+}
+        
+function myFunction() {
+    var popup = document.getElementById("myPopup");
+    popup.style.visibility = 'visible';
 }
 
 function myFunction2()
@@ -41,6 +41,7 @@ function myFunction2()
     var popup = document.getElementById("myPopup");
     popup.style.visibility = 'hidden';
 }
+
 function myFunction1() {
     var input, filter, ul, li, a, i, txtValue;
     input = document.getElementById("myInput");
@@ -60,6 +61,20 @@ function myFunction1() {
 
 function showResult(x)
 {
-    document.getElementById("result").innerHTML += "<span class=\"addFriend\">" + x.textContent + "</span>";
+    document.getElementById("result").innerHTML += "<span class=\"addFriend\" id=\""+ x.id + "\">" + x.textContent + "</span>";
     myFunction2();
+}
+
+function showText()
+{
+    var addNewRoom = document.getElementById("addNewRoom");
+    addNewRoom.style.visibility = 'hidden';
+    document.getElementById("addNewRoom-text").style.visibility = 'visible';
+}
+
+function showSpan()
+{
+    var span = document.getElementById("addNewRoom");
+    document.getElementById("addNewRoom-text").style.visibility = 'hidden';
+    span.style.visibility = "visible";
 }

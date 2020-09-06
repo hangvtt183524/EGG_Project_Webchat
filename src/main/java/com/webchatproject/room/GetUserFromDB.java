@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,6 +24,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author HANG.VTT183524
  */
+ @WebServlet("/getUserFromDB")
 public class GetUserFromDB extends HttpServlet {
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -39,12 +41,17 @@ public class GetUserFromDB extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/plain");
         PrintWriter out = response.getWriter();
+
+        String name = (String) request.getParameter("name");
+
         String user_id = null;
         String username = null;
         String inform = "";
         
-        ConnectDatabase.connect();
-        ResultSet rs = ConnectDatabase.executeSql("select * from User_Profile;");
+        if (!name.equals("") && name != null)
+        {
+            ConnectDatabase.connect();
+        ResultSet rs = ConnectDatabase.executeSql("select * from User_Profile where firstname like '%" + name +"%' or lastname like '%" + name +"%' ;");
         
         try {
             while (rs.next())
@@ -56,7 +63,8 @@ public class GetUserFromDB extends HttpServlet {
         } catch (SQLException ex) {
             Logger.getLogger(GetUserFromDB.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+        ConnectDatabase.closeConnect();
+        }
         out.print(inform);
     }
 
