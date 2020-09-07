@@ -59,12 +59,6 @@ function myFunction1() {
     }
 }
 
-function showResult(x)
-{
-    document.getElementById("result").innerHTML += "<span class=\"addFriend\" id=\""+ x.id + "\">" + x.textContent + "</span>";
-    myFunction2();
-}
-
 function showText()
 {
     var addNewRoom = document.getElementById("addNewRoom");

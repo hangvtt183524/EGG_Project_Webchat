@@ -109,7 +109,7 @@
                         
                         <div id="search-container">
                                 <form action="#" class="pull-right position">
-                                    <input type="text" placeholder="Search" class="form-control search-btn" id="search" onkeyup="search()">
+                                    <input type="text" placeholder="Search" class="form-control search-btn" id="search">
                                 </form>
                                 <ul id="list">
                                 </ul>
@@ -158,16 +158,16 @@
                     <div class="invite-row">
                         <h4 class="pull-left">People</h4>
                     </div>
-                    <ul class="chat-available-user chat-group-list">
+                    <ul class="chat-available-user chat-group-list" id="list-participants">
                         <li>
-                            <a href="#chat-room.html">
+                            <a>
                                 <i class="fa fa-circle text-success"></i>
                                 Jonathan Smith
                                 <span class="text-muted">3h:22m</span>
                             </a>
                         </li>
                         <li>
-                            <a href="#chat-room.html">
+                            <a>
                                 <i class="fa fa-circle text-success"></i>
                                 Jhone Due
                                 <span class="text-muted">1h:2m</span>
@@ -200,6 +200,12 @@
                     });
                 });
             });
+    </script>
+    <script>
+        function showResult(x)
+{
+    document.getElementById("list-participants").innerHTML += "<li><a>" + "<i class=\"fa fa-circle text-success\"></i>" + x.textContent + "</a></li>";
+}
     </script>
 </body>
 </html>
