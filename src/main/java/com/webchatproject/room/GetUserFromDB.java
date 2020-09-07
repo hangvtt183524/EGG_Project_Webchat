@@ -50,8 +50,8 @@ public class GetUserFromDB extends HttpServlet {
         
         if (!name.equals("") && name != null)
         {
-            ConnectDatabase.connect();
-        ResultSet rs = ConnectDatabase.executeSql("select * from User_Profile where firstname like '%" + name +"%' or lastname like '%" + name +"%' ;");
+            ConnectDatabase connect = new ConnectDatabase();
+        ResultSet rs = connect.executeSql("select * from User_Profile where firstname like '%" + name +"%' or lastname like '%" + name +"%' ;");
         
         try {
             while (rs.next())
@@ -60,10 +60,11 @@ public class GetUserFromDB extends HttpServlet {
                 user_id = rs.getString("user_id");
                 inform += "<li><a id=\"" + user_id + "\" onclick=\"showResult(this)\">" + username + "</a></li>";
             }
+            rs.close();
         } catch (SQLException ex) {
             Logger.getLogger(GetUserFromDB.class.getName()).log(Level.SEVERE, null, ex);
         }
-        ConnectDatabase.closeConnect();
+        connect.closeConnect();
         }
         out.print(inform);
     }

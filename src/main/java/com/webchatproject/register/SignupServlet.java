@@ -55,8 +55,8 @@ public class SignupServlet extends HttpServlet {
              result = "6";
         else
         {
-            ConnectDatabase.connect();
-            boolean check = ConnectDatabase.check("select * from User_Profile where email = '" + email + "' ;");
+            ConnectDatabase connect = new ConnectDatabase();
+            boolean check = connect.check("select * from User_Profile where email = '" + email + "' ;");
             
         if (check == true)
         {
@@ -65,10 +65,10 @@ public class SignupServlet extends HttpServlet {
         else 
         {
                 
-                ConnectDatabase.insertIntoDatabase("insert into User_Profile values ('"+ firstname + "', '" + lastname + "', '"+ password + "', '"
+                connect.insertIntoDatabase("insert into User_Profile values ('"+ firstname + "', '" + lastname + "', '"+ password + "', '"
                         + email + "', null, null);");
         }
-        ConnectDatabase.closeConnect();
+        connect.closeConnect();
         }
         
         out.print(result);

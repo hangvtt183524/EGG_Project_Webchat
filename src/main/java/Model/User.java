@@ -31,9 +31,9 @@ public class User {
     {
         boolean check = false;
         
-        ConnectDatabase.connect();
-        check = ConnectDatabase.check("select * from User_Profile where email = '" + this.email + "' and password = '" + this.password + "' ;");
-        ConnectDatabase.closeConnect();
+        ConnectDatabase connect = new ConnectDatabase();
+        check = connect.check("select * from User_Profile where email = '" + this.email + "' and password = '" + this.password + "' ;");
+        connect.closeConnect();
         
         if (check == true) getInformFromDB();
         
@@ -47,8 +47,8 @@ public class User {
     
     private void getInformFromDB()
     {
-        ConnectDatabase.connect();
-        ResultSet rs = ConnectDatabase.executeSql("select * from User_Profile where email = '" + this.email + "' ;");
+        ConnectDatabase connect = new ConnectDatabase();
+        ResultSet rs = connect.executeSql("select * from User_Profile where email = '" + this.email + "' ;");
         
         try {
             while (rs.next())
@@ -59,10 +59,11 @@ public class User {
                 
                 this.username = firstname + " " + lastname;
             }
+            rs.close();
         } catch (SQLException ex) {
             Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
         }
-        ConnectDatabase.closeConnect();
+        connect.closeConnect();
     }
     
     public String getUsername()

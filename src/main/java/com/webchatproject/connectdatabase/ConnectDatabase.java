@@ -31,18 +31,18 @@ import javax.sql.DataSource;
 public class ConnectDatabase {
     private static final long serialVersionUID = 1L;
     
-    public static Connection conn;
-    public static Statement statement;
+    private Connection conn;
+    private Statement statement;
     
     
-    public static void connect(){
-        statement = null;
+    public ConnectDatabase(){
+        this.statement = null;
 	try {
             Context initContext = new InitialContext();
             Context envContext = (Context) initContext.lookup("java:comp/env");
             DataSource dataSource = (DataSource) envContext.lookup("jdbc/Web_chat");
-            conn = dataSource.getConnection();
-            statement = conn.createStatement();
+            this.conn = dataSource.getConnection();
+            this.statement = conn.createStatement();
         } 
         catch (SQLException |NamingException e) 
         {
@@ -50,11 +50,11 @@ public class ConnectDatabase {
         }
     }
     
-    public static void insertIntoDatabase(String sql) 
+    public void insertIntoDatabase(String sql) 
     {
         try
         {
-            boolean b = statement.execute(sql);
+            boolean b = this.statement.execute(sql);
         }
         catch(SQLException e)
         {
@@ -62,12 +62,12 @@ public class ConnectDatabase {
         }
 }
     
-    public static ResultSet executeSql(String sql)
+    public ResultSet executeSql(String sql)
     {
         ResultSet rs = null;
         try
         {
-            rs = statement.executeQuery(sql);
+            rs = this.statement.executeQuery(sql);
         }
         catch(SQLException ex)
         {
@@ -76,11 +76,11 @@ public class ConnectDatabase {
         return rs;
     }
     
-    public static boolean check(String sql)
+    public boolean check(String sql)
     {
         boolean check = false;
 		try {	         
-	            ResultSet rs  = statement.executeQuery(sql);
+	            ResultSet rs  = this.statement.executeQuery(sql);
 	            
 	            // check if info was in database or not
 	            if (rs.next()) check = true;
@@ -93,11 +93,11 @@ public class ConnectDatabase {
 		return check;
     }
     
-    public static void closeConnect()
+    public void closeConnect()
     {
         try {
-            statement.close();
-            conn.close();
+            this.statement.close();
+            this.conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(ConnectDatabase.class.getName()).log(Level.SEVERE, null, ex);
         }

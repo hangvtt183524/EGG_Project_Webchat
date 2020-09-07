@@ -39,10 +39,10 @@ public class CreateNewRoom extends HttpServlet {
         User creator = (User) session.getAttribute("user");
         int user_id = creator.getUserId();
         
-        ConnectDatabase.connect();
-        ConnectDatabase.insertIntoDatabase("insert into Chat_Room values ('" + roomName + "', " + user_id + ", null);");
+        ConnectDatabase connect = new ConnectDatabase();
+        connect.insertIntoDatabase("insert into Chat_Room values ('" + roomName + "', " + user_id + ", null);");
         
-        ResultSet rs = ConnectDatabase.executeSql("select top 1 * from Chat_Room order by room_id desc;");
+        ResultSet rs = connect.executeSql("select top 1 * from Chat_Room order by room_id desc;");
         try {
             if (rs.next()) room_id = rs.getString("room_id");
             rs.close();
@@ -50,7 +50,7 @@ public class CreateNewRoom extends HttpServlet {
             Logger.getLogger(CreateNewRoom.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        ConnectDatabase.closeConnect();
+        connect.closeConnect();
           
         out.print(room_id);
     }
@@ -75,8 +75,8 @@ public class CreateNewRoom extends HttpServlet {
         int i;
         int room_id = 0;
         
-        ConnectDatabase.connect();
-        ResultSet rs = ConnectDatabase.executeSql("select top 1 * from Chat_Room order by room_id desc;");
+        ConnectDatabase connect = new ConnectDatabase();
+        ResultSet rs = connect.executeSql("select top 1 * from Chat_Room order by room_id desc;");
         try {
             if (rs.next()) room_id = Integer.parseInt(rs.getString("room_id"));
             rs.close();
@@ -86,9 +86,9 @@ public class CreateNewRoom extends HttpServlet {
         
         for (i=0; i< member_id.length; i++)
         {
-            ConnectDatabase.insertIntoDatabase("insert into Participant values ('" + Integer.parseInt(member_id[i]) + "', " + room_id + ");");
+            connect.insertIntoDatabase("insert into Participant values ('" + Integer.parseInt(member_id[i]) + "', " + room_id + ");");
         }
-        //ConnectDatabase.closeConnect();
+        connect.closeConnect();
     }
 
     /**
