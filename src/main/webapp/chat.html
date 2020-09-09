@@ -26,9 +26,9 @@
             
             var messageArea = document.getElementById("chat123");
             var text;
-            function startChat(id)
+            function startChat(x)
             {
-            room_id = id;
+            room_id = x.id;
             
             websocket = listSocketConnected.get(room_id);
            // messagesTextArea.value = "";
@@ -52,7 +52,23 @@
                         
                     }
             };
-        }
+            var xhttp = new XMLHttpRequest() || ActiveXObject();
+    //Bat su kien thay doi trang thai cuar request
+            xhttp.onreadystatechange = function() {
+            //Kiem tra neu nhu da gui request thanh cong
+                 if (this.readyState == 4 && this.status == 200) {
+                      document.getElementById("list-participants").innerHTML += this.responseText;
+                } 
+            }
+        //cau hinh request
+            xhttp.open('POST', 'GetUserFromDB', true);
+    //cau hinh header cho request
+            xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    //gui request
+            xhttp.send('room_id='+x.id);
+           }
+           
+           
             function sendMessage()
             {
                 websocket.send(messageText.value);
@@ -90,7 +106,7 @@
                     
                     <ul class="chat-list chat-group-list" id="chat-list">
                          <li>
-                             <a id="15" onclick="startChat(this.id)">
+                             <a id="55" onclick="startChat(this)">
                                  <i class="fa fa-comments-o"></i>
                                  <span>Sotus</span>
                              </a>
@@ -159,21 +175,6 @@
                         <h4 class="pull-left">People</h4>
                     </div>
                     <ul class="chat-available-user chat-group-list" id="list-participants">
-                        <li>
-                            <a>
-                                <i class="fa fa-circle text-success"></i>
-                                Jonathan Smith
-                                <span class="text-muted">3h:22m</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a>
-                                <i class="fa fa-circle text-success"></i>
-                                Jhone Due
-                                <span class="text-muted">1h:2m</span>
-                            </a>
-                        </li>
-                        
                     </ul>
                 </aside>
                 <!-- end:aside kanan chat room -->

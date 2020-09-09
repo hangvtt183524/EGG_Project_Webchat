@@ -42,7 +42,7 @@ public class CreateNewRoom extends HttpServlet {
         ConnectDatabase connect = new ConnectDatabase();
         connect.insertIntoDatabase("insert into Chat_Room values ('" + roomName + "', " + user_id + ", null);");
         
-        ResultSet rs = connect.executeSql("select top 1 * from Chat_Room order by room_id desc;");
+        ResultSet rs = connect.executeSql("select top 1 * from Chat_Room where creator_id = '" + user_id + "' order by room_id desc;");
         try {
             if (rs.next())
             { 
@@ -70,29 +70,6 @@ public class CreateNewRoom extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-                response.setContentType("text/plain");
-        PrintWriter out = response.getWriter();
-        HttpSession session = request.getSession();
-        
-        String list = (String) request.getParameter("list");
-        String[] member_id = list.split("\\s");
-        int i;
-        int room_id = 0;
-        
-        ConnectDatabase connect = new ConnectDatabase();
-        ResultSet rs = connect.executeSql("select top 1 * from Chat_Room order by room_id desc;");
-        try {
-            if (rs.next()) room_id = Integer.parseInt(rs.getString("room_id"));
-            rs.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(CreateNewRoom.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        for (i=0; i< member_id.length; i++)
-        {
-            connect.insertIntoDatabase("insert into Participant values ('" + Integer.parseInt(member_id[i]) + "', " + room_id + ");");
-        }
-        connect.closeConnect();
     }
 
     /**

@@ -10,23 +10,19 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author HANG.VTT183524
  */
- @WebServlet("/getUserFromDB")
-public class GetUserFromDB extends HttpServlet {
-
+public class AddMemberIntoRoom extends HttpServlet {
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -39,34 +35,7 @@ public class GetUserFromDB extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/plain");
-        PrintWriter out = response.getWriter();
 
-        String name = (String) request.getParameter("name");
-
-        String user_id = null;
-        String username = null;
-        String inform = "";
-        
-        if (!name.equals("") && name != null)
-        {
-            ConnectDatabase connect = new ConnectDatabase();
-        ResultSet rs = connect.executeSql("select * from User_Profile where firstname like '%" + name +"%' or lastname like '%" + name +"%' ;");
-        
-        try {
-            while (rs.next())
-            {
-                username = rs.getString("firstname") + " " + rs.getString("lastname");
-                user_id = rs.getString("user_id");
-                inform += "<li><a id=\"" + user_id + "\" onclick=\"showResult(this)\">" + username + "</a></li>";
-            }
-            rs.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(GetUserFromDB.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        connect.closeConnect();
-        }
-        out.print(inform);
     }
 
     /**
@@ -82,27 +51,27 @@ public class GetUserFromDB extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/plain");
         PrintWriter out = response.getWriter();
-
-        String room_id = (String) request.getParameter("room_id");
-        String member_id;
+        HttpSession session = request.getSession();
+        
+        String list = (String) request.getParameter("list");
+        String[] member_id = list.split("\\s");
+        int i;
+        int room_id = 0;
         
         ConnectDatabase connect = new ConnectDatabase();
-        ResultSet rs = connect.executeSql("select * from Participant join User_Profile on Participant.member_id = User_Profile.user_id where Participant.room_id = "+ Integer.parseInt(room_id) + " ;");
-        
-        String inform = "";
-        
+        ResultSet rs = connect.executeSql("select top 1 * from Chat_Room order by room_id desc;");
         try {
-            while (rs.next())
-            {
-                inform += "<li><a id=\""+ rs.getString("user_id") + "\"><i class=\"fa fa-circle text-success\"></i>" + rs.getString("firstname") + " " + rs.getString("lastname") + "</a></li>";
-            }
+            if (rs.next()) room_id = Integer.parseInt(rs.getString("room_id"));
             rs.close();
         } catch (SQLException ex) {
-            Logger.getLogger(GetUserFromDB.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CreateNewRoom.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        for (i=0; i< member_id.length; i++)
+        {
+            connect.insertIntoDatabase("insert into Participant values ('" + Integer.parseInt(member_id[i]) + "', " + room_id + ");");
         }
         connect.closeConnect();
-        
-        out.print(inform);
     }
 
     /**

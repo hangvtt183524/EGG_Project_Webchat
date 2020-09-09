@@ -25,6 +25,10 @@
         <servlet-name>GetUserFromDB</servlet-name>
         <servlet-class>com.webchatproject.room.GetUserFromDB</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AddMemberIntoRoom</servlet-name>
+        <servlet-class>com.webchatproject.room.AddMemberIntoRoom</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SigninServlet</servlet-name>
         <url-pattern>/SigninServlet</url-pattern>
@@ -40,6 +44,10 @@
     <servlet-mapping>
         <servlet-name>GetUserFromDB</servlet-name>
         <url-pattern>/GetUserFromDB</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddMemberIntoRoom</servlet-name>
+        <url-pattern>/AddMemberIntoRoom</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
