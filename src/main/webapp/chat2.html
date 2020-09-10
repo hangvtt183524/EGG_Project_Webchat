@@ -4,12 +4,13 @@
   <title>Bootstrap Example</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="chat2.css">
+  <!-- <script type="text/javascript" src="startChat.js"></script> -->
 </head>
 <body>
       
@@ -43,7 +44,7 @@
             </div>
             <div class="col-9 right-head">
                 <img src="100.jpg" class="rounded-circle my-avatar">
-                <span class="name" style="font-size: 22px;"><b>Nguyễn Văn Thanh</b></span>
+                <span class="name" style="font-size: 22px;" id="insert-roomName"></span>
                 <button type="button" title="thêm nữa" id="btn1" class="icon"><i class="fa fa-exclamation-circle"></i> </button>
                 <button type="button" id="" title="call video" class="icon"><i class="fa fa-video-camera"></i> </button>
                 <button type="button" id="" title="call" class="icon"><i class="fa fa-phone"></i> </button>
@@ -86,7 +87,7 @@
                 <div>
                     <ul class="chat-list">
                         <li class="chat">
-                            <a href="" style="text-decoration: none; color: rgb(100, 100, 100)">
+                            <a href="" style="text-decoration: none; color: rgb(100, 100, 100)" id="">
                             <div style="display: flex;">
                                 <div style="height: 50px;">
                                     <img src="100.jpg" class="rounded-circle avatar">
@@ -108,7 +109,7 @@
                             </a>
                         </li>
                         <li class="chat">
-                            <a href="" style="text-decoration: none; color: rgb(100, 100, 100)">
+                            <a href="" style="text-decoration: none; color: rgb(100, 100, 100)" onclick="startChat(this)" id="">
                             <div style="display: flex;">
                                 <div style="height: 50px;">
                                     <img src="100.jpg" class="rounded-circle avatar">
@@ -129,7 +130,7 @@
                             </div>
                             </a>
                         </li><li class="active chat">
-                            <a href="" style="text-decoration: none; color: rgb(100, 100, 100)">
+                            <a href="" style="text-decoration: none; color: rgb(100, 100, 100)" onclick="startChat(this)" id="">
                             <div style="display: flex;">
                                 <div style="height: 50px;">
                                     <img src="100.jpg" class="rounded-circle avatar">
@@ -150,7 +151,7 @@
                             </div>
                             </a>
                         </li><li class="chat">
-                            <a href="" style="text-decoration: none; color: rgb(100, 100, 100)">
+                            <a href="" style="text-decoration: none; color: rgb(100, 100, 100)" onclick="startChat(this)" id="">
                             <div style="display: flex;">
                                 <div style="height: 50px;">
                                     <img src="100.jpg" class="rounded-circle avatar">
@@ -355,6 +356,11 @@
         });
         });
 
+        $(document).ready(function(){
+            $('.chat-name').click(function(){
+                $('#insert-roomName').html = 'dsfsdfsdfsd';
+            });
+        });
         
     </script>
 
