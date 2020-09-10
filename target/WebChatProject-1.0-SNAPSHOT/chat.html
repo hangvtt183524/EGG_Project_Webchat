@@ -52,6 +52,9 @@
                         
                     }
             };
+            
+            document.getElementById("insert-roomName").innerHTML = x.lastElementChild.textContent;
+            
             var xhttp = new XMLHttpRequest() || ActiveXObject();
     //Bat su kien thay doi trang thai cuar request
             xhttp.onreadystatechange = function() {
@@ -118,7 +121,7 @@
                 <!-- start:aside tengah chat room -->
                 <aside class="tengah-side">
                     <div class="chat-room-head">
-                        <h3 id="insert-roomName">Insert RoomName</h3>
+                        <h3 id="insert-roomName"></h3>
                     		
                         <span class="video_cam"><i class="fa fa-video-camera"></i></span>
                         <span class="video_cam"><i class="fa fa-phone"></i></span>
@@ -202,11 +205,7 @@
                 });
             });
     </script>
-    <script>
-        function showResult(x)
-{
-    document.getElementById("list-participants").innerHTML += "<li><a>" + "<i class=\"fa fa-circle text-success\"></i>" + x.textContent + "</a></li>";
-}
+    <script type="text/javascript" src="addmemberintoroom.js">
     </script>
 </body>
 </html>

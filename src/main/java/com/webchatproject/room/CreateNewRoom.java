@@ -40,7 +40,7 @@ public class CreateNewRoom extends HttpServlet {
         int user_id = creator.getUserId();
         
         ConnectDatabase connect = new ConnectDatabase();
-        connect.insertIntoDatabase("insert into Chat_Room values ('" + roomName + "', " + user_id + ", null);");
+        boolean b = connect.insertIntoDatabase("insert into Chat_Room values ('" + roomName + "', " + user_id + ", null, null);");
         
         ResultSet rs = connect.executeSql("select top 1 * from Chat_Room where creator_id = '" + user_id + "' order by room_id desc;");
         try {

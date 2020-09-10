@@ -65,7 +65,7 @@ public class SignupServlet extends HttpServlet {
         else 
         {
                 
-                connect.insertIntoDatabase("insert into User_Profile values ('"+ firstname + "', '" + lastname + "', '"+ password + "', '"
+                boolean b = connect.insertIntoDatabase("insert into User_Profile values ('"+ firstname + "', '" + lastname + "', '"+ password + "', '"
                         + email + "', null, null);");
         }
         connect.closeConnect();

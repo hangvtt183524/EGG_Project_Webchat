@@ -84,6 +84,8 @@ public class GetUserFromDB extends HttpServlet {
         PrintWriter out = response.getWriter();
 
         String room_id = (String) request.getParameter("room_id");
+        request.getSession().removeAttribute("room_id");
+        request.getSession().setAttribute("room_id", room_id);
         String member_id;
         
         ConnectDatabase connect = new ConnectDatabase();

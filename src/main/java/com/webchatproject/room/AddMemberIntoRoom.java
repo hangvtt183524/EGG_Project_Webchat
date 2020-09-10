@@ -53,23 +53,27 @@ public class AddMemberIntoRoom extends HttpServlet {
         PrintWriter out = response.getWriter();
         HttpSession session = request.getSession();
         
-        String list = (String) request.getParameter("list");
-        String[] member_id = list.split("\\s");
-        int i;
-        int room_id = 0;
+        String member_id = (String) request.getParameter("member_id");
+        String room_id = (String) session.getAttribute("room_id");
+        String username = (String) request.getParameter("username");
         
         ConnectDatabase connect = new ConnectDatabase();
-        ResultSet rs = connect.executeSql("select top 1 * from Chat_Room order by room_id desc;");
-        try {
-            if (rs.next()) room_id = Integer.parseInt(rs.getString("room_id"));
-            rs.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(CreateNewRoom.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        ResultSet rs = connect.executeSql("select * from Participant where member_id = " + Integer.parseInt(member_id) + " and room_id = "+ Integer.parseInt(room_id) + ";");
         
-        for (i=0; i< member_id.length; i++)
-        {
-            connect.insertIntoDatabase("insert into Participant values ('" + Integer.parseInt(member_id[i]) + "', " + room_id + ");");
+        try {
+            if (rs.next())
+            {
+              out.print(false);
+            }
+            else 
+            {
+                 boolean b = connect.insertIntoDatabase("insert into Participant values ("+ Integer.parseInt(member_id) + ", "+ Integer.parseInt(room_id) + ");");
+                 out.print(true);
+            }
+            rs.close();
+                
+        } catch (SQLException ex) {
+            Logger.getLogger(AddMemberIntoRoom.class.getName()).log(Level.SEVERE, null, ex);
         }
         connect.closeConnect();
     }

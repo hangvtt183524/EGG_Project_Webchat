@@ -50,16 +50,18 @@ public class ConnectDatabase {
         }
     }
     
-    public void insertIntoDatabase(String sql) 
+    public boolean insertIntoDatabase(String sql) 
     {
+        boolean b = false;
         try
         {
-            boolean b = this.statement.execute(sql);
+            b = this.statement.execute(sql);
         }
         catch(SQLException e)
         {
             e.printStackTrace();
         }
+        return b;
 }
     
     public ResultSet executeSql(String sql)
