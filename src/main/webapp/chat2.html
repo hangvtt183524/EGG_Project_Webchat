@@ -42,8 +42,8 @@
                 </div>
             </div>
             <div class="col-9 right-head">
-                <img src="100.jpg" class="rounded-circle my-avatar">
-                <span class="name" style="font-size: 22px;"><b>Nguyễn Văn Thanh</b></span>
+                <img id="img-avatar" src="100.jpg" class="rounded-circle my-avatar">
+                <span class="name" style="font-size: 22px;"><b id="name-box">Nguyễn Văn Thanh</b></span>
                 <button type="button" title="thêm nữa" id="btn1" class="icon"><i class="fa fa-exclamation-circle"></i> </button>
                 <button type="button" id="" title="call video" class="icon"><i class="fa fa-video-camera"></i> </button>
                 <button type="button" id="" title="call" class="icon"><i class="fa fa-phone"></i> </button>
@@ -72,7 +72,7 @@
                         </div>
                 <!-- Modal footer -->
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-danger">Ok</button>
+                            <button type="button" class="btn btn-danger">ok</button>
                             <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                         </div>
                     </div>
@@ -86,14 +86,14 @@
                 <div>
                     <ul class="chat-list">
                         <li class="chat">
-                            <a href="" style="text-decoration: none; color: rgb(100, 100, 100)">
+                            <button type="button" class="bt">
                             <div style="display: flex;">
                                 <div style="height: 50px;">
-                                    <img src="100.jpg" class="rounded-circle avatar">
+                                    <img src="so4.png" class="rounded-circle avatar">
                                 </div>
                                 <div style="margin-left: 10px;">
                                     <div style="height: 30px;">
-                                        <span class="chat-name">Egg web</span>
+                                        <span id="" class="chat-name">số 1</span>
                                     </div>
                                     <div style="display: flex;" >
                                         <div style="height: 20px;">
@@ -105,17 +105,17 @@
                                     </div>
                                 </div>
                             </div>
-                            </a>
+                        </button>
                         </li>
                         <li class="chat">
-                            <a href="" style="text-decoration: none; color: rgb(100, 100, 100)">
+                            <button type="button" class="bt">
                             <div style="display: flex;">
                                 <div style="height: 50px;">
-                                    <img src="100.jpg" class="rounded-circle avatar">
+                                    <img src="so5.png" class="rounded-circle avatar">
                                 </div>
                                 <div style="margin-left: 10px;">
                                     <div style="height: 30px;">
-                                        <span class="chat-name">Egg web</span>
+                                        <span class="chat-name">số 2</span>
                                     </div>
                                     <div style="display: flex;" >
                                         <div style="height: 20px;">
@@ -127,16 +127,16 @@
                                     </div>
                                 </div>
                             </div>
-                            </a>
+                            </button>
                         </li><li class="active chat">
-                            <a href="" style="text-decoration: none; color: rgb(100, 100, 100)">
+                            <button type="button" class="bt">
                             <div style="display: flex;">
                                 <div style="height: 50px;">
-                                    <img src="100.jpg" class="rounded-circle avatar">
+                                    <img src="so6.png" class="rounded-circle avatar">
                                 </div>
                                 <div style="margin-left: 10px;">
                                     <div style="height: 30px;">
-                                        <span class="chat-name">Egg web</span>
+                                        <span class="chat-name">số 3</span>
                                     </div>
                                     <div style="display: flex;" >
                                         <div style="height: 20px;">
@@ -148,16 +148,17 @@
                                     </div>
                                 </div>
                             </div>
-                            </a>
-                        </li><li class="chat">
-                            <a href="" style="text-decoration: none; color: rgb(100, 100, 100)">
+                        </button>
+                        </li>
+                        <li class="chat">
+                            <button type="button" class="bt" >
                             <div style="display: flex;">
                                 <div style="height: 50px;">
-                                    <img src="100.jpg" class="rounded-circle avatar">
+                                    <img src="so7.png" class="rounded-circle avatar">
                                 </div>
                                 <div style="margin-left: 10px;">
                                     <div style="height: 30px;">
-                                        <span class="chat-name">Egg web</span>
+                                        <span class="chat-name">số 4</span>
                                     </div>
                                     <div style="display: flex;" >
                                         <div style="height: 20px;">
@@ -169,7 +170,7 @@
                                     </div>
                                 </div>
                             </div>
-                            </a>
+                            </button>
                         </li>
                     </ul>
                 </div>
@@ -355,6 +356,21 @@
         });
         });
 
+
+        $(document).ready(function(){
+            $('.chat').click(function(){
+            var box1=$(this);
+            var nameGroup = box1[0].children[0].children[0].children[1].children[0].children[0].innerText;
+            var list=document.getElementsByClassName("chat");
+             for(var i=0; i<list.length;i++){
+                 list[i].children[0].style.backgroundColor="white";
+             }
+            box1[0].children[0].style.backgroundColor="rgb(230, 230, 230)";
+            document.getElementById("name-box").innerText=nameGroup;
+            var img = box1[0].children[0].children[0].children[0].children[0].getAttribute("src");
+            document.getElementById("img-avatar").src=img;
+        });
+        });
         
     </script>
 
