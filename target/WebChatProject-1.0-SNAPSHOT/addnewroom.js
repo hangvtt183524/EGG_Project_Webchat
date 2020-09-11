@@ -3,72 +3,41 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
-document.getElementById("addNewRoom-text").addEventListener('keyup', 
-function(event) {
-    if (event.keyCode === 13)
-    {
-        var roomName = document.getElementById("addNewRoom-text").value;
+function addNewRoom() {
+    var roomName = document.getElementById("addNewRoom-text").value;
     var xhttp = new XMLHttpRequest() || ActiveXObject();
     //Bat su kien thay doi trang thai cuar request
     xhttp.onreadystatechange = function () {
         //Kiem tra neu nhu da gui request thanh cong
         if (this.readyState == 4 && this.status == 200) {
+            document.getElementsByClassName("chat-list")[0].innerHTML += 
+                       "<li class=\"chat\">"
+                            + "<a style=\"text-decoration: none; color: rgb(100, 100, 100)\" onclick=\"startChat(this)\" id=\"" + ("room-" + this.responseText) + "\">"
+                            +     "<div style=\"display: flex;\">"
+                            +         "<div style=\"height: 50px;\">"
+                            +              "<img src=\"libs/image/default-avatar.png\" class=\"rounded-circle avatar\">"
+                            +         "</div>"
+                            +         "<div style=\"margin-left: 10px;\">"
+                            +              "<div style=\"height: 30px;\">"
+                            +                   "<span class=\"chat-name\">" + roomName + "</span>"
+                            +              "</div>"
+                            +              "<div style=\"display: flex;\">"
+                            +                   "<div style=\"height: 20px;\">"
+                            +                        "<span></span>"
+                            +                   "</div>"
+                            +                   "<div style=\"height: 20px;\">"
+                            +                        "<span></span>"
+                            +                   "</div>"
+                            +              "</div>"
+                            +         "</div>"
+                            +     "</div>"
+                            +  "</a>"
+                            +"</li>";
+
         }
     }
     //cau hinh request
     xhttp.open('GET','CreateNewRoom?roomName=' + roomName,true);
     //gui request
     xhttp.send();
-    }
-});
-        
-function hide()
-{
-    var addNewRoom = document.getElementById("add-new-room");
-    addNewRoom.style.visibility = "hidden";
-    var popup = document.getElementById("myPopup");
-    popup.style.visibility = 'hidden';
-}
-        
-function myFunction() {
-    var popup = document.getElementById("myPopup");
-    popup.style.visibility = 'visible';
-}
-
-function myFunction2()
-{
-    var popup = document.getElementById("myPopup");
-    popup.style.visibility = 'hidden';
-}
-
-function myFunction1() {
-    var input, filter, ul, li, a, i, txtValue;
-    input = document.getElementById("myInput");
-    filter = input.value.toUpperCase();
-    ul = document.getElementById("myPopup");
-    li = ul.getElementsByTagName("li");
-    for (i = 0; i < li.length; i++) {
-        a = li[i].getElementsByTagName("a")[0];
-        txtValue = a.textContent || a.innerText;
-        if (txtValue.toUpperCase().indexOf(filter) > -1) {
-            li[i].style.display = "";
-        } else {
-            li[i].style.display = "none";
-        }
-    }
-}
-
-function showText()
-{
-    var addNewRoom = document.getElementById("addNewRoom");
-    addNewRoom.style.visibility = 'hidden';
-    document.getElementById("addNewRoom-text").style.visibility = 'visible';
-}
-
-function showSpan()
-{
-    var span = document.getElementById("addNewRoom");
-    document.getElementById("addNewRoom-text").style.visibility = 'hidden';
-    span.style.visibility = "visible";
 }

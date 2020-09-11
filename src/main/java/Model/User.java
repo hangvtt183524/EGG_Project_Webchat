@@ -20,6 +20,7 @@ public class User {
     private String password;
     private String user_id;
     private String username;
+    private String avatar;
     
     public User(String email, String password)
     {
@@ -58,6 +59,7 @@ public class User {
                 String lastname = rs.getString("lastname");
                 
                 this.username = firstname + " " + lastname;
+                this.avatar = rs.getString("avatar");
             }
             rs.close();
         } catch (SQLException ex) {
@@ -73,6 +75,10 @@ public class User {
     public int getUserId()
     {
         return Integer.parseInt(this.user_id);
+    }
+    public String getAvatar()
+    {
+        return this.avatar;
     }
 }
 

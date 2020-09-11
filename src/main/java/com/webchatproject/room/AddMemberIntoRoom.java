@@ -53,9 +53,8 @@ public class AddMemberIntoRoom extends HttpServlet {
         PrintWriter out = response.getWriter();
         HttpSession session = request.getSession();
         
-        String member_id = (String) request.getParameter("member_id");
+        String member_id = ((String) request.getParameter("member_id")).substring(5);
         String room_id = (String) session.getAttribute("room_id");
-        String username = (String) request.getParameter("username");
         
         ConnectDatabase connect = new ConnectDatabase();
         ResultSet rs = connect.executeSql("select * from Participant where member_id = " + Integer.parseInt(member_id) + " and room_id = "+ Integer.parseInt(room_id) + ";");

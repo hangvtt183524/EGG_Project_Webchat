@@ -61,7 +61,17 @@ public class ChatRoomEndpoint {
         String chatroom = (String) userSession.getUserProperties().get("chatroom");
         
         String username = user.getUsername();
-        
+        String avatar = user.getAvatar();
+
+        String messageReturn = "<div class=\"d-flex justify-content-start mb-4\">"
+                             +     "<div class=\"img_cont_msg\">"
+                             +         "<img src=\"" + avatar + "\" class=\"rounded-circle user_img_msg\">"
+                             +     "</div>"
+                             +     "<div class=\"msg_cotainer\">"
+                             +         message
+                             +         "<span class=\"msg_time>8:40 AM, Today</span>"
+                             +     "</div>"
+                             + "</div>";
         Set<Session> chatroomUsers = getChatroom(chatroom);
         Iterator<Session> irerator = chatroomUsers.iterator();
         Session current;
@@ -69,7 +79,7 @@ public class ChatRoomEndpoint {
         {
             current = irerator.next();
             if (!current.equals(userSession))
-                 current.getBasicRemote().sendText(buildJsonData(message));
+                 current.getBasicRemote().sendText(buildJsonData(messageReturn));
         }
     }
 
@@ -89,9 +99,9 @@ public class ChatRoomEndpoint {
     
     }
     
-        private String buildJsonData(String message)
+        private String buildJsonData(String messageReturn)
     {
-        JsonObject jsonObject = Json.createObjectBuilder().add("message",message).build();
+        JsonObject jsonObject = Json.createObjectBuilder().add("message",messageReturn).build();
         StringWriter stringWriter = new StringWriter();
         try (JsonWriter jsonWriter = Json.createWriter(stringWriter))
         {
