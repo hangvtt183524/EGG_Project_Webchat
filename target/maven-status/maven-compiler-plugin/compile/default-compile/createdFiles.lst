@@ -1,9 +1,10 @@
 com\webchatproject\chat\ChatRoomEndpoint.class
-com\webchatproject\room\GetUserFromDB.class
 com\webchatproject\register\SignupServlet.class
 com\webchatproject\register\SigninServlet.class
 Model\User.class
 com\webchatproject\connectdatabase\ConnectDatabase.class
+com\webchatproject\room\GetRoomAvatar.class
+com\webchatproject\room\GetInformFromDB.class
 com\webchatproject\room\CreateNewRoom.class
 com\webchatproject\chat\ChatroomServerConfigurator.class
 com\webchatproject\room\AddMemberIntoRoom.class

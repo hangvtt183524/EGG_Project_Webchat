@@ -39,7 +39,7 @@ public class SigninServlet extends HttpServlet {
                 if (checkInfor)
                 {
                     session.setAttribute("user", user);
-                    request.getRequestDispatcher("chat.html").forward(request, response);
+                    request.getRequestDispatcher("chat2.html").forward(request, response);
                 }
                 else
                 {
@@ -137,7 +137,7 @@ public class SigninServlet extends HttpServlet {
                     ckPassword.setMaxAge(3600);
                     response.addCookie(ckPassword);
             }
-            request.getRequestDispatcher("chat.html").forward(request, response);
+            request.getRequestDispatcher("chat2.html").forward(request, response);
         }
         else  
         {
