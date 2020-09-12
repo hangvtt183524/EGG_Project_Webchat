@@ -3,13 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
+// handle when user make a new room
+// use ajax to send room-name to servlet, receive room-id
 function addNewRoom() {
     var roomName = document.getElementById("addNewRoom-text").value;
     var xhttp = new XMLHttpRequest() || ActiveXObject();
-    //Bat su kien thay doi trang thai cuar request
+    
     xhttp.onreadystatechange = function () {
-        //Kiem tra neu nhu da gui request thanh cong
+        
         if (this.readyState == 4 && this.status == 200) {
+            // append new room to chat-list
             document.getElementsByClassName("chat-list")[0].innerHTML += 
                        "<li class=\"chat\">"
                             + "<a style=\"text-decoration: none; color: rgb(100, 100, 100)\" onclick=\"startChat(this)\" id=\"" + ("room-" + this.responseText) + "\">"
@@ -34,11 +38,10 @@ function addNewRoom() {
                             +  "</a>"
                             +"</li>";
                     
-            $('#myModal').hide();
         }
     }
-    //cau hinh request
+    
     xhttp.open('GET','CreateNewRoom?roomName=' + roomName,true);
-    //gui request
+    
     xhttp.send();
 }

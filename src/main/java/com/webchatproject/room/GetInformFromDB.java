@@ -105,7 +105,6 @@ public class GetInformFromDB extends HttpServlet {
         PrintWriter out = response.getWriter();
 
         String room_id = (String) request.getSession().getAttribute("room_id");
-        String member_id;
         
         ConnectDatabase connect = new ConnectDatabase();
         ResultSet rs = connect.executeSql("select * from Participant join User_Profile on Participant.member_id = User_Profile.user_id where Participant.room_id = "+ Integer.parseInt(room_id) + " ;");
@@ -115,7 +114,7 @@ public class GetInformFromDB extends HttpServlet {
         try {
             while (rs.next())
             {
-                inform.append("<div class=\"people\">"
+                inform.append("<div class=\"people\" id=\"user-" + rs.getString("member_id") + "\">"
                              +     "<img src=\"" + rs.getString("avatar") + "\" class=\"rounded-circle my-avatar\">"
                              +     "<span class=\"name\" style=\"color:rgb(100, 100, 100);\">" + rs.getString("firstname") + " " + rs.getString("lastname") + "</span>"
                              +     "<button type=\"button\" class=\"close\" data-dismiss=\"people\">&times;</button>"

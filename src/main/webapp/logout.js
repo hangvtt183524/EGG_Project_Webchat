@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 
+// handle when user want to log out 
 $(document).ready(function(){
     $('#logout').click(function(){
         $('#logout-submit').click();

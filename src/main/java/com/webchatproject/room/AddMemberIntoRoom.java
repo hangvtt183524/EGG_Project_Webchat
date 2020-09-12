@@ -67,7 +67,7 @@ public class AddMemberIntoRoom extends HttpServlet {
             else 
             {
                  boolean b = connect.insertIntoDatabase("insert into Participant values ("+ Integer.parseInt(member_id) + ", "+ Integer.parseInt(room_id) + ");");
-                 out.print(true);
+                 out.print(member_id);
             }
             rs.close();
                 

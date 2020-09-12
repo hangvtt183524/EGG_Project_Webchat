@@ -26,15 +26,13 @@
                     <ul>
                         <li data-toggle="modal" data-target="#myModal2"><i class="fa fa-users"></i>Add Member</li>
                         <li id="quitRoom"><i class="fa fa-sign-out"></i>Quit Room</li>
-                        <li><i class="fa fa-trash"></i>Delete Conversation</li>
-                        <li><i class="fa fa-volume-up"></i>Not Nortification</li>
+                        <li id="deleteRoom"><i class="fa fa-trash"></i>Delete Conversation</li>
                         <li><i class="fa fa-search"></i>Search</li>
                     </ul>
                 </div>
                 <button type="button" title="cài dặt" id="cog" class="icon"><i class="fa fa-cog"></i></button>
                 <div id="menu-cog" class="action_menu">
                     <ul>
-                        <li><i class="fa fa-user-cog"></i>Setting</li>
                         <li><i class="fa fa-user-circle-o"></i>Profile</li>
                         <li><i class="fa fa-users"></i>Friends List</li>
                         <li><i class="fa fa-question-circle"></i>Help</li>
@@ -114,6 +112,7 @@
                     <span class="icon-search"><i class="fa fa-search"></i></span>
                     <input type="search" id="search" style="background-color: rgb(230, 230, 230); width: 90%; border: none;" placeholder="Search..." />
                 </div>
+                <div id="removeSocket" style="display: none;" onclick="removeSocket()"></div>
                 <div>
                     <ul class="chat-list" id="chat-list">
                         
@@ -335,7 +334,6 @@
           });
         });
     </script>
-
     <script type="text/javascript" src="addmember.js">
     </script>
 <!--    <script>

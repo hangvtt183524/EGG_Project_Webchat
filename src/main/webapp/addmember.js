@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
+// handle when user search people, filter by name
    function searchPeople() {
     var input, filter, ul, li, a, i, txtValue;
     input = document.getElementById("myInput");
@@ -21,6 +21,7 @@
     }
 }
 
+// add member to room. All member will show in room-list-member
 function addToRoom(x)
 {
     
@@ -29,9 +30,9 @@ function addToRoom(x)
     xhttp.onreadystatechange = function() {
             //Kiem tra neu nhu da gui request thanh cong
             if (this.readyState == 4 && this.status == 200) {
-                if (this.responseText == 'true')
+                if (this.responseText != 'false' && this.responseText != null)
                     document.getElementById("div21").innerHTML +=
-                             "<div class=\"people\">"
+                             "<div class=\"people\" id=\"user-" + this.responseText + "\">"
                              +     "<img src=\"" + x.firstElementChild.firstElementChild.src + "\" class=\"rounded-circle my-avatar\">"
                              +     "<span class=\"name\" style=\"color:rgb(100, 100, 100);\">" + x.firstElementChild.textContent + "</span>"
                              +     "<button type=\"button\" class=\"close\" data-dismiss=\"people\">&times;</button>"

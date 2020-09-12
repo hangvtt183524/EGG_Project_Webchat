@@ -30,6 +30,9 @@ import javax.websocket.server.ServerEndpoint;
  *
  * @author HANG.VTT183524
  */
+
+// Server handle when people chat
+// 
 @ServerEndpoint(value="/chatroomEndpoint/{chatroom}", configurator = ChatroomServerConfigurator.class)
 public class ChatRoomEndpoint {
     static Map<String, Set<Session>> chatrooms = (Map<String, Set<Session>>)Collections.synchronizedMap(new HashMap<String, Set<Session>>());

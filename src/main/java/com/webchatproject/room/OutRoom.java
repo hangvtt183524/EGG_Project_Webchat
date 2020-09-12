@@ -39,6 +39,7 @@ public class OutRoom extends HttpServlet {
         String command = (String) request.getParameter("command");
         
         if (command.equals("quit")) quitRoom(request, response);
+        if (command.equals("delete")) deleteRoom(request, response);
     }
     
     private void quitRoom(HttpServletRequest request, HttpServletResponse response)
@@ -59,12 +60,44 @@ public class OutRoom extends HttpServlet {
             {
                 if (user_id == Integer.parseInt(rs.getString("creator_id")))
                     out.print(false);
-            }
-            else 
+                else 
             {
-                connect.executeSql("delete from Participant where room_id = " + room_id + " and member_id = " + user_id + " ;");
+                connect.insertIntoDatabase("delete from Participant where room_id = " + room_id + " and member_id = " + user_id + " ;");
                 out.print(room_id);
                 
+            }
+            }
+            
+            rs.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(OutRoom.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        connect.closeConnect();
+    }
+    
+    private void deleteRoom(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException
+    {
+        HttpSession session = request.getSession();
+        PrintWriter out = response.getWriter();
+        
+        User user = (User) session.getAttribute("user");
+        int user_id = user.getUserId();
+        String room_id = (String) session.getAttribute("room_id");
+        
+        ConnectDatabase connect = new ConnectDatabase();
+        ResultSet rs = connect.executeSql("select creator_id from Chat_Room where room_id = " + room_id + " ;");
+        
+        try {
+            if (rs.next())
+            {
+                if (user_id == Integer.parseInt(rs.getString("creator_id")))
+                {
+                    connect.insertIntoDatabase("delete from Participant where room_id = " + room_id + " ;");
+                    connect.insertIntoDatabase("delete from Chat_Room where room_id = " + room_id + " ;");
+                    out.print(room_id);
+                }
+                else out.print(false);
             }
             rs.close();
         } catch (SQLException ex) {

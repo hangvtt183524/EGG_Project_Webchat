@@ -15,6 +15,7 @@ import java.util.logging.Logger;
  *
  * @author HANG.VTT183524
  */
+// this class contain information of user
 public class User {
     private String email;
     private String password;
@@ -22,12 +23,14 @@ public class User {
     private String username;
     private String avatar;
     
+    // construct object when sign-in by email and password were inputed from keybroad
     public User(String email, String password)
     {
         this.email = email;
         this.password = password;
     }
     
+    // when people submit, check if email and password are correct or not
     public boolean checkInfor()
     {
         boolean check = false;
@@ -36,6 +39,7 @@ public class User {
         check = connect.check("select * from User_Profile where email = '" + this.email + "' and password = '" + this.password + "' ;");
         connect.closeConnect();
         
+        // if information is true, get the rest of information from DB
         if (check == true) getInformFromDB();
         
         return check;
