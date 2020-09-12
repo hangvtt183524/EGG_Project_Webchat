@@ -14,18 +14,18 @@
   <script type="text/javascript" src="addnewroom.js"></script>
 </head>
 <body>
-      
+    <div id="up"></div>
     <div class="container-fluid">
          <div class="row">
             <div class="col-3 left-head">
-                <img src="100.jpg" class="rounded-circle my-avatar">
+                <img src="store/image/default-avatar.png" class="rounded-circle my-avatar">
                 <span class="name" style="color:rgb(39, 75, 173);"><b>Thanh</b></span>
                 <button type="button" title="mới" class="icon" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus-circle"></i></button>
                 <button id="edit" type="button" title="chỉnh sửa" class="icon"><i class="fa fa-edit"></i></button>
                 <div id="menu-edit" class="action_menu">
                     <ul>
                         <li data-toggle="modal" data-target="#myModal2"><i class="fa fa-users"></i>Add Member</li>
-                        <li><i class="fa fa-sign-out"></i>Quit Room</li>
+                        <li id="quitRoom"><i class="fa fa-sign-out"></i>Quit Room</li>
                         <li><i class="fa fa-trash"></i>Delete Conversation</li>
                         <li><i class="fa fa-volume-up"></i>Not Nortification</li>
                         <li><i class="fa fa-search"></i>Search</li>
@@ -39,22 +39,20 @@
                         <li><i class="fa fa-users"></i>Friends List</li>
                         <li><i class="fa fa-question-circle"></i>Help</li>
                         <li><i class="fa fa-bug"></i>Report Some Error</li>
-                        <li><i class="fa fa-ban"></i>Logout</li>
+                        <li id="logout"><i class="fa fa-ban"></i>Logout</li>
+
                     </ul>
+                        <form method="get" action="LogoutServlet" style="display: none;">
+                            <input type="submit" value="Logout" id="logout-submit">
+                        </form>
                 </div>
             </div>
             <div class="col-9 right-head">
-<<<<<<< HEAD
-<<<<<<< HEAD
-                <img src="100.jpg" class="rounded-circle my-avatar">
-=======
-                <img src="100.jpg" class="rounded-circle my-avatar" id="test">
->>>>>>> convertToNewChatHTML
+
                 <span class="name" style="font-size: 22px;" id="insert-roomName"></span>
-=======
+
                 <img id="img-avatar" src="100.jpg" class="rounded-circle my-avatar">
-                <span class="name" style="font-size: 22px;"><b id="name-box">Nguyễn Văn Thanh</b></span>
->>>>>>> 6d774071018f2aa9e97faf1b88410a6b0f038355
+
                 <button type="button" title="thêm nữa" id="btn1" class="icon"><i class="fa fa-exclamation-circle"></i> </button>
                 <button type="button" title="call video" class="icon"><i class="fa fa-video-camera"></i> </button>
                 <button type="button" title="call" class="icon"><i class="fa fa-phone"></i> </button>
@@ -81,11 +79,9 @@
                         </div>
                 <!-- Modal footer -->
                         <div class="modal-footer">
-<<<<<<< HEAD
-                            <button type="button" class="btn btn-danger">ok</button>
-=======
+
                             <button type="button" class="btn btn-danger" onclick="addNewRoom()">Ok</button>
->>>>>>> convertToNewChatHTML
+                            
                             <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                         </div>
                     </div>
@@ -119,116 +115,8 @@
                     <input type="search" id="search" style="background-color: rgb(230, 230, 230); width: 90%; border: none;" placeholder="Search..." />
                 </div>
                 <div>
-<<<<<<< HEAD
-                    <ul class="chat-list">
-                        <li class="chat">
-<<<<<<< HEAD
-                            <a href="" style="text-decoration: none; color: rgb(100, 100, 100)" id="">
-=======
-                            <button type="button" class="bt">
->>>>>>> 6d774071018f2aa9e97faf1b88410a6b0f038355
-                            <div style="display: flex;">
-                                <div style="height: 50px;">
-                                    <img src="so4.png" class="rounded-circle avatar">
-                                </div>
-                                <div style="margin-left: 10px;">
-                                    <div style="height: 30px;">
-                                        <span id="" class="chat-name">số 1</span>
-                                    </div>
-                                    <div style="display: flex;" >
-                                        <div style="height: 20px;">
-                                            <span>Thanh:</span>
-                                        </div>
-                                        <div style="height: 20px;">
-                                            <span>bye bye mn</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </button>
-                        </li>
-                        <li class="chat">
-<<<<<<< HEAD
-                            <a href="" style="text-decoration: none; color: rgb(100, 100, 100)" onclick="startChat(this)" id="">
-=======
-                            <button type="button" class="bt">
->>>>>>> 6d774071018f2aa9e97faf1b88410a6b0f038355
-                            <div style="display: flex;">
-                                <div style="height: 50px;">
-                                    <img src="so5.png" class="rounded-circle avatar">
-                                </div>
-                                <div style="margin-left: 10px;">
-                                    <div style="height: 30px;">
-                                        <span class="chat-name">số 2</span>
-                                    </div>
-                                    <div style="display: flex;" >
-                                        <div style="height: 20px;">
-                                            <span>Thanh:</span>
-                                        </div>
-                                        <div style="height: 20px;">
-                                            <span>bye bye mn</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            </button>
-                        </li><li class="active chat">
-<<<<<<< HEAD
-                            <a href="" style="text-decoration: none; color: rgb(100, 100, 100)" onclick="startChat(this)" id="">
-=======
-                            <button type="button" class="bt">
->>>>>>> 6d774071018f2aa9e97faf1b88410a6b0f038355
-                            <div style="display: flex;">
-                                <div style="height: 50px;">
-                                    <img src="so6.png" class="rounded-circle avatar">
-                                </div>
-                                <div style="margin-left: 10px;">
-                                    <div style="height: 30px;">
-                                        <span class="chat-name">số 3</span>
-                                    </div>
-                                    <div style="display: flex;" >
-                                        <div style="height: 20px;">
-                                            <span>Thanh:</span>
-                                        </div>
-                                        <div style="height: 20px;">
-                                            <span>bye bye mn</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-<<<<<<< HEAD
-                            </a>
-                        </li><li class="chat">
-                            <a href="" style="text-decoration: none; color: rgb(100, 100, 100)" onclick="startChat(this)" id="">
-=======
-                        </button>
-                        </li>
-                        <li class="chat">
-                            <button type="button" class="bt" >
->>>>>>> 6d774071018f2aa9e97faf1b88410a6b0f038355
-                            <div style="display: flex;">
-                                <div style="height: 50px;">
-                                    <img src="so7.png" class="rounded-circle avatar">
-                                </div>
-                                <div style="margin-left: 10px;">
-                                    <div style="height: 30px;">
-                                        <span class="chat-name">số 4</span>
-                                    </div>
-                                    <div style="display: flex;" >
-                                        <div style="height: 20px;">
-                                            <span>Thanh:</span>
-                                        </div>
-                                        <div style="height: 20px;">
-                                            <span>bye bye mn</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            </button>
-                        </li>
-=======
                     <ul class="chat-list" id="chat-list">
->>>>>>> convertToNewChatHTML
+                        
                     </ul>
                 </div>
             </div>
@@ -283,8 +171,11 @@
                     
                     
                         <button type="button" class="icon-meh-o" title="icon"><i class="fa fa-meh-o"></i></button>
-                        <button type="button" class="icon-paperclip" title="đính kèm"><i class=" fa fa-paperclip"></i></button>
-                    
+                        <button type="button" class="icon-paperclip" title="đính kèm" id="upload-btn"><i class=" fa fa-paperclip"></i></button>
+                        <form method="post" action="UploadFile" enctype="multipart/form-data" style="display: none;">
+                           <input type="file" id="upload-input" multiple>
+                           <input type="submit" value="Upload" id="upload-submit"/>
+                        </form>
                         <button class="send-mess" title="gửi" onclick="sendMessage();">Send</button>
                 </div>
             </div>
@@ -395,7 +286,12 @@
             $('#div31').toggle();
         });
         });
-
+        
+        $(document).ready(function(){
+            $('#upload-btn').click(function(){
+                $('#upload-input').click();
+            });
+        });
 
         $(document).ready(function(){
             $('#btn1').click(function(){
@@ -405,12 +301,6 @@
                 event2.classList.toggle('sub');
         });
         });
-<<<<<<< HEAD
-
-<<<<<<< HEAD
-=======
-        
->>>>>>> convertToNewChatHTML
         $(document).ready(function(){
             $.ajax({
                 type: 'POST',
@@ -429,25 +319,9 @@
                     $('#myUL').html(result);
                 }
             });
-<<<<<<< HEAD
-=======
+        });
 
         $(document).ready(function(){
-            $('.chat').click(function(){
-            var box1=$(this);
-            var nameGroup = box1[0].children[0].children[0].children[1].children[0].children[0].innerText;
-            var list=document.getElementsByClassName("chat");
-             for(var i=0; i<list.length;i++){
-                 list[i].children[0].style.backgroundColor="white";
-             }
-            box1[0].children[0].style.backgroundColor="rgb(230, 230, 230)";
-            document.getElementById("name-box").innerText=nameGroup;
-            var img = box1[0].children[0].children[0].children[0].children[0].getAttribute("src");
-            document.getElementById("img-avatar").src=img;
-        });
->>>>>>> 6d774071018f2aa9e97faf1b88410a6b0f038355
-=======
-            
             $('#btn-member').click(function(){
             $.ajax({
                 type: 'POST',
@@ -459,12 +333,53 @@
                 }
             });
           });
->>>>>>> convertToNewChatHTML
         });
     </script>
 
     <script type="text/javascript" src="addmember.js">
-     
     </script>
+<!--    <script>
+        $(document).ready(function(){
+  $('#upload-input').on('change', function() {
+    var files = $(this)[0].files;
+    $('#upload-submit').click();
+//    var fd = new FormData();
+//        fd.append('file',file);
+//        $.ajax({
+//            type: 'POST',
+//            url: 'UploadFile',
+//            data: fd,
+//            success: function(result)
+//            {
+//                alert(result);
+//            }
+//        });
+    var str;
+    for(var i = 0; i < files.length; i++) {
+      var file = files[i];
+      var fileReader = new FileReader();
+      fileReader.onload = function() {
+          var fileName = file.name;
+          var len = fileName.length;
+          if (fileName.substring(len - 3) == 'png' || fileName.substring(len - 3) == 'jpg' || fileName.substring(len - 4) == 'jiff')
+          {
+              str = "<div class=\"d-flex justify-content-end-mb-4\">"
+
+                   +          "<img class=\"js-file-image\" style=\"height: 100px; width: 100px; background-color: white; border: 2px solid black; margin-left: 1020px;\">"
+
+                   +"</div>";
+         }
+        $('#mess').append(str);
+        var imageSrc = event.target.result;
+        $('.js-file-image').last().attr('src', imageSrc);
+            
+      };
+      fileReader.readAsDataURL(file);
+    }  
+  });
+});
+    </script>-->
+<script type="text/javascript" src="outRoom.js"></script>
+<script type="text/javascript" src="logout.js"></script>
 </body>
 </html>

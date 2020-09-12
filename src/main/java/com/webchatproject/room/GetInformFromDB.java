@@ -136,8 +136,11 @@ public class GetInformFromDB extends HttpServlet {
         PrintWriter out = response.getWriter();
         
         HttpSession session = request.getSession();
-        User creator = (User) session.getAttribute("user");
-        int user_id = creator.getUserId();
+        User user = (User) session.getAttribute("user");
+        
+        if (user != null)
+        {
+            int user_id = user.getUserId();
         
         StringBuilder inform = new StringBuilder("");
         
@@ -178,5 +181,6 @@ public class GetInformFromDB extends HttpServlet {
         
         connect.closeConnect();
         out.print(inform);
+        }
     }
 }

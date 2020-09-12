@@ -33,6 +33,18 @@
         <servlet-name>GetRoomAvatar</servlet-name>
         <servlet-class>com.webchatproject.room.GetRoomAvatar</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UploadFile</servlet-name>
+        <servlet-class>com.webchatproject.chat.UploadFile</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>OutRoom</servlet-name>
+        <servlet-class>com.webchatproject.room.OutRoom</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LogoutServlet</servlet-name>
+        <servlet-class>com.webchatproject.register.LogoutServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SigninServlet</servlet-name>
         <url-pattern>/SigninServlet</url-pattern>
@@ -56,6 +68,18 @@
     <servlet-mapping>
         <servlet-name>GetRoomAvatar</servlet-name>
         <url-pattern>/GetRoomAvatar</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UploadFile</servlet-name>
+        <url-pattern>/UploadFile</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>OutRoom</servlet-name>
+        <url-pattern>/OutRoom</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LogoutServlet</servlet-name>
+        <url-pattern>/LogoutServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -33,7 +33,8 @@ function addNewRoom() {
                             +     "</div>"
                             +  "</a>"
                             +"</li>";
-
+                    
+            $('#myModal').hide();
         }
     }
     //cau hinh request
