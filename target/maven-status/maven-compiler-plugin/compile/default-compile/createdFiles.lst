@@ -3,6 +3,7 @@ com\webchatproject\room\OutRoom.class
 com\webchatproject\room\GetRoomAvatar.class
 com\webchatproject\chat\UploadFile.class
 com\webchatproject\room\GetInformFromDB.class
+com\webchatproject\room\StoreMessage.class
 com\webchatproject\register\LogoutServlet.class
 com\webchatproject\chat\ChatroomServerConfigurator.class
 com\webchatproject\register\SignupServlet.class

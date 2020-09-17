@@ -171,11 +171,12 @@
                     
                         <button type="button" class="icon-meh-o" title="icon"><i class="fa fa-meh-o"></i></button>
                         <button type="button" class="icon-paperclip" title="đính kèm" id="upload-btn"><i class=" fa fa-paperclip"></i></button>
-                        <form method="post" action="UploadFile" enctype="multipart/form-data" style="display: none;">
-                           <input type="file" id="upload-input" multiple>
+                        
+                        <form method="post" action="uploadFile" enctype="multipart/form-data" id="form" style="display: none;" target="#messageText">
+                           <input type="file" name="files" id="upload-input" multiple>
                            <input type="submit" value="Upload" id="upload-submit"/>
                         </form>
-                        <button class="send-mess" title="gửi" onclick="sendMessage();">Send</button>
+                        <button class="send-mess" title="gửi" onclick="sendMessage();" id="btn-sendMessage">Send</button>
                 </div>
             </div>
             <div id="p2" class="col-3 sub right" >
@@ -334,49 +335,8 @@
           });
         });
     </script>
-    <script type="text/javascript" src="addmember.js">
-    </script>
-<!--    <script>
-        $(document).ready(function(){
-  $('#upload-input').on('change', function() {
-    var files = $(this)[0].files;
-    $('#upload-submit').click();
-//    var fd = new FormData();
-//        fd.append('file',file);
-//        $.ajax({
-//            type: 'POST',
-//            url: 'UploadFile',
-//            data: fd,
-//            success: function(result)
-//            {
-//                alert(result);
-//            }
-//        });
-    var str;
-    for(var i = 0; i < files.length; i++) {
-      var file = files[i];
-      var fileReader = new FileReader();
-      fileReader.onload = function() {
-          var fileName = file.name;
-          var len = fileName.length;
-          if (fileName.substring(len - 3) == 'png' || fileName.substring(len - 3) == 'jpg' || fileName.substring(len - 4) == 'jiff')
-          {
-              str = "<div class=\"d-flex justify-content-end-mb-4\">"
-
-                   +          "<img class=\"js-file-image\" style=\"height: 100px; width: 100px; background-color: white; border: 2px solid black; margin-left: 1020px;\">"
-
-                   +"</div>";
-         }
-        $('#mess').append(str);
-        var imageSrc = event.target.result;
-        $('.js-file-image').last().attr('src', imageSrc);
-            
-      };
-      fileReader.readAsDataURL(file);
-    }  
-  });
-});
-    </script>-->
+    <script type="text/javascript" src="addmember.js"></script>
+    <script type="text/javascript" src="uploadFile.js"></script>
 <script type="text/javascript" src="outRoom.js"></script>
 <script type="text/javascript" src="logout.js"></script>
 </body>

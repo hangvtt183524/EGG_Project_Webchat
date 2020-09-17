@@ -28,13 +28,15 @@ import javax.sql.DataSource;
  *
  * @author HANG.VTT183524
  */
+
+// class control connect and work with database
 public class ConnectDatabase {
     private static final long serialVersionUID = 1L;
     
     private Connection conn;
     private Statement statement;
     
-    
+    // open connect 
     public ConnectDatabase(){
         this.statement = null;
 	try {
@@ -50,6 +52,7 @@ public class ConnectDatabase {
         }
     }
     
+    // execute query that don't return set of result
     public boolean insertIntoDatabase(String sql) 
     {
         boolean b = false;
@@ -63,7 +66,7 @@ public class ConnectDatabase {
         }
         return b;
 }
-    
+    // execute query that return ResultSet
     public ResultSet executeSql(String sql)
     {
         ResultSet rs = null;
@@ -78,6 +81,7 @@ public class ConnectDatabase {
         return rs;
     }
     
+    // check information in DB is true or false
     public boolean check(String sql)
     {
         boolean check = false;
@@ -95,6 +99,7 @@ public class ConnectDatabase {
 		return check;
     }
     
+    // close connect after done
     public void closeConnect()
     {
         try {

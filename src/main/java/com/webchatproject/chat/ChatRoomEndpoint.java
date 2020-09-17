@@ -6,6 +6,7 @@
 package com.webchatproject.chat;
 
 import Model.User;
+import com.webchatproject.room.StoreMessage;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.util.Collections;
@@ -35,8 +36,10 @@ import javax.websocket.server.ServerEndpoint;
 // 
 @ServerEndpoint(value="/chatroomEndpoint/{chatroom}", configurator = ChatroomServerConfigurator.class)
 public class ChatRoomEndpoint {
+    //element in this map is (key = room_id; value = Set contain member's sessions of the room_id)
     static Map<String, Set<Session>> chatrooms = (Map<String, Set<Session>>)Collections.synchronizedMap(new HashMap<String, Set<Session>>());
     
+    // get Set of Session that match with room_id passed by chatroomName argument
     public Set<Session> getChatroom (String chatroomName)
         {
             Set<Session> chatroom =  chatrooms.get(chatroomName);
@@ -47,6 +50,7 @@ public class ChatRoomEndpoint {
             }
             return chatroom;
         }
+    // handle when websocket open
    @OnOpen
     public void handleOpen (EndpointConfig config, Session userSession, @PathParam("chatroom") String chatroom)
     {
@@ -57,6 +61,7 @@ public class ChatRoomEndpoint {
         
     }
     
+    // handle when people are chatting
     @OnMessage
     public void handleMessage(String message, Session userSession) throws IOException
     {
@@ -65,7 +70,9 @@ public class ChatRoomEndpoint {
         
         String username = user.getUsername();
         String avatar = user.getAvatar();
+        int user_id = user.getUserId();
 
+        // form of message return to Client
         String messageReturn = "<div class=\"d-flex justify-content-start mb-4\">"
                              +     "<div class=\"img_cont_msg\">"
                              +         "<img src=\"" + avatar + "\" class=\"rounded-circle user_img_msg\">"
@@ -75,18 +82,24 @@ public class ChatRoomEndpoint {
                              +         "<span class=\"msg_time>8:40 AM, Today</span>"
                              +     "</div>"
                              + "</div>";
+        // get Sessions of this chatroom (room_id)
         Set<Session> chatroomUsers = getChatroom(chatroom);
+        
+        // loop through all Session of member of this room
         Iterator<Session> irerator = chatroomUsers.iterator();
         Session current;
         while (irerator.hasNext())
         {
             current = irerator.next();
+            // send message to user if only they aren't message' sender
             if (!current.equals(userSession))
                  current.getBasicRemote().sendText(buildJsonData(messageReturn));
         }
+        // store message into DB
+        StoreMessage.store(user_id, Integer.parseInt(chatroom.substring(5)), message);
     }
 
-    
+    // handle when websocket close
     @OnClose
     public void handleClose(Session userSession)
     {
@@ -102,6 +115,7 @@ public class ChatRoomEndpoint {
     
     }
     
+    // format data in order to return to websocket
         private String buildJsonData(String messageReturn)
     {
         JsonObject jsonObject = Json.createObjectBuilder().add("message",messageReturn).build();

@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,27 +20,45 @@ import javax.servlet.http.Part;
  *
  * @author HANG.VTT183524
  */
+@WebServlet("/uploadFile")
 @MultipartConfig(fileSizeThreshold=1024*1024*2, // 2MB
                  maxFileSize=1024*1024*10,      // 10MB
                  maxRequestSize=1024*1024*50,
-                 location="/D:\\Code\\Servlet\\WebChatProject\\src\\main\\webapp\\store\\image\\con-img")
+                 location="/D:\\Code\\Servlet\\WebChatProject\\src\\main\\webapp")
 public class UploadFile extends HttpServlet {
     protected void doPost(HttpServletRequest request,
             HttpServletResponse response) throws ServletException, IOException {
-
+        response.setContentType("text/plain");
+        PrintWriter out = response.getWriter();
+        int length;
         
+        //get file from ajax, user can upload many file in the same time
         for (Part part : request.getParts()) {
-            String fileName = extractFileName(part);
-            // refines the fileName in case it is an absolute path
-            if (fileName != null && fileName.length() > 0) {
-
-                   part.write(fileName);
-            }
+        String fileName = extractFileName(part);
+        // refines the fileName in case it is an absolute path
+        if (fileName != null && fileName.length() > 0) {
+            length = fileName.length();
+            // if fileName ends with png, jpg, jiff --> image
+            if (fileName.substring(length - 3).equals("png") || fileName.substring(length - 3).equals("jpg") || fileName.substring(length - 4).equals("jiff"))
+                {
+                    part.write("store\\image\\con-img\\" + fileName);
+                    out.print("<img src=\"store/image/con-img/" + fileName + "\">");
+                }
+            // store files aren't image
+            else 
+                {
+                    part.write("store\\file\\" + fileName);
+                    out.print("<div class=\"message-file\">" + fileName + "</div>");
+                }
+            }            
         }
+        
+        
     }
     /**
      * Extracts file name from HTTP header content-disposition
      */
+    // get file-name
     private String extractFileName(Part part) {
         String contentDisp = part.getHeader("content-disposition");
         String[] items = contentDisp.split(";");
