@@ -18,7 +18,7 @@
     <div class="container-fluid">
          <div class="row">
             <div class="col-3 left-head">
-                <img src="store/image/default-avatar.png" class="rounded-circle my-avatar">
+                <button class="avatar01"><img src="store/image/default-avatar.png" data-toggle="modal" data-target="#myModal3" class="rounded-circle my-avatar"></button>
                 <span class="name" style="color:rgb(39, 75, 173);"><b>Thanh</b></span>
                 <button type="button" title="mới" class="icon" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus-circle"></i></button>
                 <button id="edit" type="button" title="chỉnh sửa" class="icon"><i class="fa fa-edit"></i></button>
@@ -33,7 +33,7 @@
                 <button type="button" title="cài dặt" id="cog" class="icon"><i class="fa fa-cog"></i></button>
                 <div id="menu-cog" class="action_menu">
                     <ul>
-                        <li><i class="fa fa-user-circle-o"></i>Profile</li>
+                        <li data-toggle="modal" data-target="#myModal3"><i class="fa fa-user-circle-o"></i>Profile</li>
                         <li><i class="fa fa-users"></i>Friends List</li>
                         <li><i class="fa fa-question-circle"></i>Help</li>
                         <li><i class="fa fa-bug"></i>Report Some Error</li>
@@ -102,6 +102,40 @@
                     <!-- Modal footer -->
                             <div class="modal-footer">
                                <button type="button" class="btn btn-danger">Ok</button>
+                               <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal" id="myModal3">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                    <!-- Modal Header -->
+                            <div class="modal-header">
+                                <h4 class="modal-title">Thông tin cá nhân</h4>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+                    <!-- Modal body -->
+                            <div class="modal-body">
+                                <div>
+                                    <button class="avatar01"><img style="height: 150px; width: 150px; display: block; margin-left: 150px; margin-right: auto;" src="100.jpg" class="rounded-circle my-avatar"></button>
+                                </div>
+                                <hr>
+                                <div>
+                                    <span style="width: 50px;">FirstName:<b class="profile">Thanh</b></span>
+                                </div>
+                                <div>
+                                    <span style="width: 50px;">LastName:<b class="profile">Nguyen Van</b></span>
+                                </div>
+                                <div>
+                                    <span style="width: 50px;">Email:<b class="profile">Thanh20183632@gmail.com</b></span>
+                                </div>
+                                <div>
+                                    <span style="width: 50px;">Password:<b class="profile">123456</b></span>
+                                </div>
+                            </div>
+                    <!-- Modal footer -->
+                            <div class="modal-footer">
                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                             </div>
                         </div>
@@ -241,21 +275,8 @@
     <script language="javascript">
         
         var button1 = document.getElementById("btn1");
-        //var button2 = document.getElementById("btn2");
-        // var button3 = document.getElementById("btn3");
         var event1 = document.getElementById("p1");
         var event2 = document.getElementById("p2");
-        
-   
-        // $(document).ready(function(){
-        //     $("#btn2").click(function(){
-        //     $("#p3").toggle(500);
-        // });
-        // });
-
-        // button3.onclick = function(){
-        //     document.getElementById("p3").style.display="none";
-        // };
 
         $(document).ready(function(){
             $('#cog').click(function(){
