@@ -76,6 +76,15 @@ body{
        
 }
 
+.avatar01{
+    background-color: white;
+    border: none;
+}
+
+.profile{
+    color: rgb(40, 175, 199);
+}
+
 .my-avatar{
     margin: 10px;
     height: 60px;
