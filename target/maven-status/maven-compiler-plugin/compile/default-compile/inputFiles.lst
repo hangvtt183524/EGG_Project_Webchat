@@ -4,6 +4,7 @@ D:\Code\Servlet\WebChatProject\src\main\java\com\webchatproject\room\OutRoom.jav
 D:\Code\Servlet\WebChatProject\src\main\java\com\webchatproject\chat\ChatRoomEndpoint.java
 D:\Code\Servlet\WebChatProject\src\main\java\com\webchatproject\chat\UploadFile.java
 D:\Code\Servlet\WebChatProject\src\main\java\com\webchatproject\connectdatabase\ConnectDatabase.java
+D:\Code\Servlet\WebChatProject\src\main\java\com\webchatproject\room\StoreMessage.java
 D:\Code\Servlet\WebChatProject\src\main\java\com\webchatproject\room\GetInformFromDB.java
 D:\Code\Servlet\WebChatProject\src\main\java\com\webchatproject\register\LogoutServlet.java
 D:\Code\Servlet\WebChatProject\src\main\java\com\webchatproject\room\AddMemberIntoRoom.java

@@ -61,6 +61,7 @@ public class GetInformFromDB extends HttpServlet {
         if (command.equals("search")) doingSearch(request, response);
         if (command.equals("member")) getMember(request, response);
         if (command.equals("room")) getRoom(request, response);
+        if (command.equals("chat")) getMess(request, response);
     }
 
     /**
@@ -181,5 +182,45 @@ public class GetInformFromDB extends HttpServlet {
         connect.closeConnect();
         out.print(inform);
         }
+    }
+    
+    private void getMess(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException
+    {
+        PrintWriter out = response.getWriter();
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+        int user_id = user.getUserId();
+        
+        String room_id = ((String) request.getParameter("room_id")).substring(5);
+        StringBuilder result = new StringBuilder("");
+        
+        ConnectDatabase connect = new ConnectDatabase();
+        ResultSet rs = connect.executeSql("select m.content, m.author_id, u.avatar from Messenger as m join User_Profile as u on m.author_id = u.user_id where m.room_id = " + room_id + " ;");
+        
+        try {
+            while (rs.next())
+            {
+                if (Integer.parseInt(rs.getString("author_id")) == user_id)
+                    result.append("<div class=\"d-flex justify-content-end mb-4\">"
+                                  +     "<div class=\"msg_cotainer_send\">"
+                                  +        rs.getString("content")
+                                  +     "</div></div>");
+                else result.append("<div class=\"d-flex justify-content-start mb-4\">"
+                             +     "<div class=\"img_cont_msg\">"
+                             +         "<img src=\"" + rs.getString("avatar") + "\" class=\"rounded-circle user_img_msg\">"
+                             +     "</div>"
+                             +     "<div class=\"msg_cotainer\">"
+                             +         rs.getString("content")
+                             +         "<span class=\"msg_time>8:40 AM, Today</span>"
+                             +     "</div>"
+                             + "</div>");
+            }
+            rs.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(GetInformFromDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        connect.closeConnect();
+        out.print(result.toString());
     }
 }

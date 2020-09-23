@@ -37,7 +37,6 @@ function startChat(x)
              xhttp.open('GET', 'GetRoomAvatar?room_id=' + room_id, true);
      //send request
            xhttp.send();
-    
         // get WebSocket Object mathc room_id if exists   
         websocket = listSocketConnected.get(room_id);
         // if not, create a new WebSocket Object
