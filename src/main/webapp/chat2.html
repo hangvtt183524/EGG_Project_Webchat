@@ -12,13 +12,13 @@
   <link rel="stylesheet" href="chat2.css">
   <script type="text/javascript" src="startChat.js"></script>
   <script type="text/javascript" src="addnewroom.js"></script>
+  <script type="text/javascript" src="loadMess.js"></script>
 </head>
 <body>
-    <div id="up"></div>
     <div class="container-fluid">
          <div class="row">
             <div class="col-3 left-head">
-                <button class="avatar01"><img src="store/image/default-avatar.png" data-toggle="modal" data-target="#myModal3" class="rounded-circle my-avatar"></button>
+                <button class="avatar01"><img src="store/image/room-img/room-59.png" data-toggle="modal" data-target="#myModal3" class="rounded-circle my-avatar"></button>
                 <span class="name" style="color:rgb(39, 75, 173);"><b>Thanh</b></span>
                 <button type="button" title="mới" class="icon" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus-circle"></i></button>
                 <button id="edit" type="button" title="chỉnh sửa" class="icon"><i class="fa fa-edit"></i></button>
@@ -35,8 +35,6 @@
                     <ul>
                         <li data-toggle="modal" data-target="#myModal3"><i class="fa fa-user-circle-o"></i>Profile</li>
                         <li><i class="fa fa-users"></i>Friends List</li>
-                        <li><i class="fa fa-question-circle"></i>Help</li>
-                        <li><i class="fa fa-bug"></i>Report Some Error</li>
                         <li id="logout"><i class="fa fa-ban"></i>Logout</li>
 
                     </ul>
@@ -46,10 +44,10 @@
                 </div>
             </div>
             <div class="col-9 right-head">
-
+                <img id="img-avatar" src="" class="rounded-circle my-avatar">
                 <span class="name" style="font-size: 22px;" id="insert-roomName"></span>
 
-                <img id="img-avatar" src="100.jpg" class="rounded-circle my-avatar">
+                
 
                 <button type="button" title="thêm nữa" id="btn1" class="icon"><i class="fa fa-exclamation-circle"></i> </button>
                 <button type="button" title="call video" class="icon"><i class="fa fa-video-camera"></i> </button>
@@ -162,9 +160,6 @@
             </div>
             <div id="p1" class="col-9 middle">
                 <div class="mess" id="mess">
-                    
-
-
                 </div>
                 <div style="display: flex; height: 60px; background-color: rgb(230, 230, 230);">
                     
@@ -214,7 +209,7 @@
                 </div>
                 <div id="div21" style="display: none;">
                     <div class="people">
-                        <img src="100.jpg" class="rounded-circle my-avatar">
+                        <img src="" class="rounded-circle my-avatar">
                         <span class="name" style="color:rgb(100, 100, 100);">Nguyễn Văn Thanh</span> 
                         <button type="button" class="close" data-dismiss="people">&times;</button>
                     </div>

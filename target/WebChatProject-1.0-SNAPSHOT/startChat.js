@@ -30,7 +30,7 @@ function startChat(x)
                             
         document.getElementsByClassName("rounded-circle my-avatar")[1].src = this.responseText;
         document.getElementsByClassName("rounded-circle my-avatar")[2].src = this.responseText;
-        
+        loadMess();
                } 
         }
         //config request
@@ -84,3 +84,17 @@ function startChat(x)
         // remove this WebSocket Object from list
         listSocketConnected.delete(room_id);
     }
+  
+  function loadMess()
+{
+    $(document).ready(function(){
+            $.ajax({
+                type: 'POST',
+                data: {command: 'chat'},
+                url: 'getInformFromDB',
+                success: function(result){
+                    $('#mess').append(result);
+                }
+            });
+          });
+}

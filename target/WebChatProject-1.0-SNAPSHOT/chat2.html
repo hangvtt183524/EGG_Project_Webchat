@@ -12,13 +12,13 @@
   <link rel="stylesheet" href="chat2.css">
   <script type="text/javascript" src="startChat.js"></script>
   <script type="text/javascript" src="addnewroom.js"></script>
+  <script type="text/javascript" src="loadMess.js"></script>
 </head>
 <body>
-    <div id="up"></div>
     <div class="container-fluid">
          <div class="row">
             <div class="col-3 left-head">
-                <button class="avatar01"><img src="store/image/default-avatar.png" data-toggle="modal" data-target="#myModal3" class="rounded-circle my-avatar"></button>
+                <button class="avatar01"><img src="store/image/room-img/room-59.png" data-toggle="modal" data-target="#myModal3" class="rounded-circle my-avatar"></button>
                 <span class="name" style="color:rgb(39, 75, 173);"><b>Thanh</b></span>
                 <button type="button" title="mới" class="icon" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus-circle"></i></button>
                 <button id="edit" type="button" title="chỉnh sửa" class="icon"><i class="fa fa-edit"></i></button>
@@ -35,8 +35,6 @@
                     <ul>
                         <li data-toggle="modal" data-target="#myModal3"><i class="fa fa-user-circle-o"></i>Profile</li>
                         <li><i class="fa fa-users"></i>Friends List</li>
-                        <li><i class="fa fa-question-circle"></i>Help</li>
-                        <li><i class="fa fa-bug"></i>Report Some Error</li>
                         <li id="logout"><i class="fa fa-ban"></i>Logout</li>
 
                     </ul>
@@ -46,10 +44,10 @@
                 </div>
             </div>
             <div class="col-9 right-head">
-
+                <img id="img-avatar" src="" class="rounded-circle my-avatar">
                 <span class="name" style="font-size: 22px;" id="insert-roomName"></span>
 
-                <img id="img-avatar" src="100.jpg" class="rounded-circle my-avatar">
+                
 
                 <button type="button" title="thêm nữa" id="btn1" class="icon"><i class="fa fa-exclamation-circle"></i> </button>
                 <button type="button" title="call video" class="icon"><i class="fa fa-video-camera"></i> </button>
@@ -117,25 +115,32 @@
                             </div>
                     <!-- Modal body -->
                             <div class="modal-body">
-                                <div>
-                                    <button class="avatar01"><img style="height: 150px; width: 150px; display: block; margin-left: 150px; margin-right: auto;" src="100.jpg" class="rounded-circle my-avatar"></button>
-                                </div>
-                                <hr>
-                                <div>
-                                    <span style="width: 50px;">FirstName:<b class="profile">Thanh</b></span>
-                                </div>
-                                <div>
-                                    <span style="width: 50px;">LastName:<b class="profile">Nguyen Van</b></span>
-                                </div>
-                                <div>
-                                    <span style="width: 50px;">Email:<b class="profile">Thanh20183632@gmail.com</b></span>
-                                </div>
-                                <div>
-                                    <span style="width: 50px;">Password:<b class="profile">123456</b></span>
-                                </div>
+                                <div class="text-center">
+                                    <img id="avat" style="height: 150px; width: 150px; display: block; margin-left: auto; margin-right: auto;" src="100.jpg" class="rounded-circle my-avatar">
+                                    <h6>Upload a different photo...</h6>
+                                    <input id="avat-img" type="file" class="text-center center-block file-upload">
+                                  </div></hr><br>
+                               
+                                    <div>
+                                        <form action="##">
+                                          <label style="color: rgb(49, 113, 209);">Username</label><br>
+                                          <input style="width: 400px;" id="ip1" type="text" value="jsmith"><br>
+                                          <label style="color: rgb(49, 113, 209);">First Name</label><br>
+                                          <input style="width: 400px;" id="ip2" type="text" value="John"><br>
+                                          <label style="color: rgb(49, 113, 209);">Last Name</label><br>
+                                          <input style="width: 400px;" id="ip3" type="text" value="Smith"><br>
+                                          <label style="color: rgb(49, 113, 209);">Email</label><br>
+                                          <input style="width: 400px;" id="ip4" type="text" value="jsmith@yourcompany.com"><br>
+                                          <label style="color: rgb(49, 113, 209);">Password</label><br>
+                                          <input style="width: 400px;" id="ip5" type="text" value="Smith"><br>
+                                        </form>
+                                    </div>
+                                   
+                                
                             </div>
                     <!-- Modal footer -->
                             <div class="modal-footer">
+                               <button type="submit" class="btn btn-primary" id="update">Update</button>
                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                             </div>
                         </div>
@@ -155,9 +160,6 @@
             </div>
             <div id="p1" class="col-9 middle">
                 <div class="mess" id="mess">
-                    
-
-
                 </div>
                 <div style="display: flex; height: 60px; background-color: rgb(230, 230, 230);">
                     
@@ -207,7 +209,7 @@
                 </div>
                 <div id="div21" style="display: none;">
                     <div class="people">
-                        <img src="100.jpg" class="rounded-circle my-avatar">
+                        <img src="" class="rounded-circle my-avatar">
                         <span class="name" style="color:rgb(100, 100, 100);">Nguyễn Văn Thanh</span> 
                         <button type="button" class="close" data-dismiss="people">&times;</button>
                     </div>
@@ -256,6 +258,27 @@
             $('#div11').toggle();
         });
         });
+
+
+
+        $(document).ready(function(){
+            $('#update').click(function(){
+            var x11=document.getElementById("ip1").value;
+            document.getElementById("ip1").value=x11;
+            var x12=document.getElementById("ip2").value;
+            document.getElementById("ip2").value=x12;
+            var x13=document.getElementById("ip3").value;
+            document.getElementById("ip3").value=x13;
+            var x14=document.getElementById("ip4").value;
+            document.getElementById("ip4").value=x14;
+            var x15=document.getElementById("ip5").value;
+            document.getElementById("ip5").value=x15; 
+            
+        });
+        });
+
+
+
 
         $(document).ready(function(){
             $('#div2').click(function(){
@@ -322,5 +345,6 @@
     <script type="text/javascript" src="uploadFile.js"></script>
 <script type="text/javascript" src="outRoom.js"></script>
 <script type="text/javascript" src="logout.js"></script>
+<script src="load.js"></script>
 </body>
 </html>

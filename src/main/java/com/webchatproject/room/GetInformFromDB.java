@@ -192,7 +192,7 @@ public class GetInformFromDB extends HttpServlet {
         User user = (User) session.getAttribute("user");
         int user_id = user.getUserId();
         
-        String room_id = ((String) request.getParameter("room_id")).substring(5);
+        String room_id = (String) request.getSession().getAttribute("room_id");
         StringBuilder result = new StringBuilder("");
         
         ConnectDatabase connect = new ConnectDatabase();
@@ -220,7 +220,7 @@ public class GetInformFromDB extends HttpServlet {
         } catch (SQLException ex) {
             Logger.getLogger(GetInformFromDB.class.getName()).log(Level.SEVERE, null, ex);
         }
-        connect.closeConnect();
+       connect.closeConnect();
         out.print(result.toString());
     }
 }

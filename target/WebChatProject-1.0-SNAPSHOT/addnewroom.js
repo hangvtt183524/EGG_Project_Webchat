@@ -7,8 +7,12 @@
 // handle when user make a new room
 // use ajax to send room-name to servlet, receive room-id
 function addNewRoom() {
+    $('#myModal').toggle();
     var roomName = document.getElementById("addNewRoom-text").value;
-    var xhttp = new XMLHttpRequest() || ActiveXObject();
+    
+    if (roomName != null || roomName != "" ) 
+    {
+        var xhttp = new XMLHttpRequest() || ActiveXObject();
     
     xhttp.onreadystatechange = function () {
         
@@ -44,4 +48,5 @@ function addNewRoom() {
     xhttp.open('GET','CreateNewRoom?roomName=' + roomName,true);
     
     xhttp.send();
+    }
 }

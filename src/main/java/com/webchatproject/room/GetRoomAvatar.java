@@ -5,6 +5,7 @@
  */
 package com.webchatproject.room;
 
+import Model.User;
 import com.webchatproject.connectdatabase.ConnectDatabase;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -16,6 +17,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -55,6 +57,7 @@ public class GetRoomAvatar extends HttpServlet {
         } catch (SQLException ex) {
             Logger.getLogger(GetRoomAvatar.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
         connect.closeConnect();
     }
 

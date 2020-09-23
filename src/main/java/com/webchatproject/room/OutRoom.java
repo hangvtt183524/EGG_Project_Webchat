@@ -94,6 +94,7 @@ public class OutRoom extends HttpServlet {
                 if (user_id == Integer.parseInt(rs.getString("creator_id")))
                 {
                     connect.insertIntoDatabase("delete from Participant where room_id = " + room_id + " ;");
+                    connect.insertIntoDatabase("delete from Messenger where room_id = " + room_id + " ;");
                     connect.insertIntoDatabase("delete from Chat_Room where room_id = " + room_id + " ;");
                     out.print(room_id);
                 }
