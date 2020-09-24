@@ -24,14 +24,15 @@ import javax.servlet.http.Part;
 @MultipartConfig(fileSizeThreshold=1024*1024*2, // 2MB
                  maxFileSize=1024*1024*10,      // 10MB
                  maxRequestSize=1024*1024*50,
-                 location="/D:\\Code\\Servlet\\WebChatProject\\src\\main\\webapp")
+                 location="/D:\\Code\\Servlet\\WebChatProject\\src\\main\\webapp") 
 public class UploadFile extends HttpServlet {
-    protected void doPost(HttpServletRequest request,
+    @Override
+    protected synchronized void doPost(HttpServletRequest request,
             HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/plain");
         PrintWriter out = response.getWriter();
         int length;
-        
+        String room_id = (String) request.getSession().getAttribute("room_id");
         //get file from ajax, user can upload many file in the same time
         for (Part part : request.getParts()) {
         String fileName = extractFileName(part);
@@ -41,16 +42,20 @@ public class UploadFile extends HttpServlet {
             // if fileName ends with png, jpg, jiff --> image
             if (fileName.substring(length - 3).equals("png") || fileName.substring(length - 3).equals("jpg") || fileName.substring(length - 4).equals("jiff"))
                 {
-                    part.write("store\\image\\con-img\\" + fileName);
-                    out.print("<img src=\"store/image/con-img/" + fileName + "\">");
+                    part.write("store\\image\\con-img\\" + room_id + "-"+ fileName);
+                    out.print("<img src=\"store/image/con-img/" + room_id + "-" + fileName + "\">");
                 }
             // store files aren't image
             else 
                 {
-                    part.write("store\\file\\" + fileName);
-                    out.print("<div class=\"message-file\">" + fileName + "</div>");
+                    part.write("store\\file\\" + room_id + "-" + fileName); 
+                    out.print("<div class=\"message-file\">" + room_id + "-" + fileName + "</div>");
                 }
-            }            
+            
+            
+            }
+        
+            
         }
         
         

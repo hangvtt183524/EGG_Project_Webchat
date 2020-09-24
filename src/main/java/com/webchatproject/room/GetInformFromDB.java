@@ -208,13 +208,15 @@ public class GetInformFromDB extends HttpServlet {
                                   +     "</div></div>");
                 else result.append("<div class=\"d-flex justify-content-start mb-4\">"
                              +     "<div class=\"img_cont_msg\">"
-                             +         "<img src=\"" + rs.getString("avatar") + "\" class=\"rounded-circle user_img_msg\">"
+                             +         "<img src=\"" + rs.getString("avatar") 
+                             + "\" " + "class=\"rounded-circle user_img_msg\">"
                              +     "</div>"
                              +     "<div class=\"msg_cotainer\">"
                              +         rs.getString("content")
-                             +         "<span class=\"msg_time>8:40 AM, Today</span>"
+                             +         "<span class=\"msg_time\">8:40 AM, Today</span>"
                              +     "</div>"
                              + "</div>");
+                
             }
             rs.close();
         } catch (SQLException ex) {
