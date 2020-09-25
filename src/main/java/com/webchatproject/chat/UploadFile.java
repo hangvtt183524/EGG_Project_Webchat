@@ -49,7 +49,7 @@ public class UploadFile extends HttpServlet {
             else 
                 {
                     part.write("store\\file\\" + room_id + "-" + fileName); 
-                    out.print("<div class=\"message-file\">" + room_id + "-" + fileName + "</div>");
+                    out.print("<div class=\"message-file\">"+"<u>"+ room_id + "-" + fileName +"</u>"+ "</div>");
                 }
             
             

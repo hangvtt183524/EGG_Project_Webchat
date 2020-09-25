@@ -85,7 +85,7 @@ body{
     color: rgb(40, 175, 199);
 }
 
-.my-avatar{
+.my-avatar, .room-avatar{
     margin: 10px;
     height: 60px;
     width: 60px;

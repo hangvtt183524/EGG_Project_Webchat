@@ -5,14 +5,14 @@
  */
       $(document).ready(function(){
           $('#upload-input').on('change', function(){
-              $('#form').submit();
+              $('#form_uploadFileMess').submit();
           });
       });
       
             $(document).ready(function() {
-    $('#form').submit(function(event) {
+    $('form').submit(function(event) {
         event.preventDefault();
- 
+        var form_id = $(this).attr("id");
         // Calling AJAX
         $.ajax({
             url : $(this).attr('action'),
@@ -22,15 +22,20 @@
             cache : false,
             processData : false,
             success : function(response) {
-                $('#messageText').val(response);
-                $('#btn-sendMessage').click();
+                if (form_id == "form_uploadFileMess")
+                  setTimeout(function(){ 
+                  $('#messageText').val(response);
+                  $('#btn-sendMessage').click();}, 2000);
             }
+            
         });
  
         return false;
     });
  
 });
+
+
 
 
 

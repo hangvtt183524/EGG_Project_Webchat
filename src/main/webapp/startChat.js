@@ -28,8 +28,8 @@ function startChat(x)
             //check if request successfully
                  if (this.readyState == 4 && this.status == 200) {
                             
-        document.getElementsByClassName("rounded-circle my-avatar")[1].src = this.responseText;
-        document.getElementsByClassName("rounded-circle my-avatar")[2].src = this.responseText;
+        document.getElementById("img-room-avatar-1").src = this.responseText;
+        document.getElementById("img-room-avatar-2").src = this.responseText;
         loadMess();
                } 
         }

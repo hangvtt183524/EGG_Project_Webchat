@@ -15,6 +15,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.json.Json;
+import javax.json.JsonObject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -55,13 +57,14 @@ public class GetInformFromDB extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-                response.setContentType("text/plain");
+                
         String command = (String) request.getParameter("command");
         
         if (command.equals("search")) doingSearch(request, response);
         if (command.equals("member")) getMember(request, response);
         if (command.equals("room")) getRoom(request, response);
         if (command.equals("chat")) getMess(request, response);
+        if (command.equals("user")) getUser(request, response);
     }
 
     /**
@@ -77,6 +80,7 @@ public class GetInformFromDB extends HttpServlet {
     private void doingSearch(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
     {
+        response.setContentType("text/plain");
         PrintWriter out = response.getWriter();
         StringBuilder result = new StringBuilder("");
         
@@ -103,6 +107,7 @@ public class GetInformFromDB extends HttpServlet {
     private void getMember(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
     {
+        response.setContentType("text/plain");
         PrintWriter out = response.getWriter();
 
         String room_id = (String) request.getSession().getAttribute("room_id");
@@ -133,6 +138,7 @@ public class GetInformFromDB extends HttpServlet {
     private void getRoom(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
     {
+        response.setContentType("text/plain");
         PrintWriter out = response.getWriter();
         
         HttpSession session = request.getSession();
@@ -187,6 +193,7 @@ public class GetInformFromDB extends HttpServlet {
     private void getMess(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
     {
+        response.setContentType("text/plain");
         PrintWriter out = response.getWriter();
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
@@ -224,5 +231,18 @@ public class GetInformFromDB extends HttpServlet {
         }
        connect.closeConnect();
         out.print(result.toString());
+    }
+    
+    private void getUser(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException
+    {
+        response.setContentType("text/plain");
+        
+        PrintWriter out = response.getWriter();
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+        
+        out.print(user.getUsername() + "," + user.getAvatar());
+        
     }
 }
