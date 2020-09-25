@@ -27,7 +27,7 @@ import javax.servlet.http.Part;
                  location="/D:\\Code\\Servlet\\WebChatProject\\src\\main\\webapp") 
 public class UploadFile extends HttpServlet {
     @Override
-    protected synchronized void doPost(HttpServletRequest request,
+    protected void doPost(HttpServletRequest request,
             HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/plain");
         PrintWriter out = response.getWriter();

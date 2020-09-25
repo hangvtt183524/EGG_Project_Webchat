@@ -242,7 +242,7 @@ public class GetInformFromDB extends HttpServlet {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
         
-        out.print(user.getUsername() + "," + user.getAvatar());
+        out.print(user.getUsername() + "," + user.getEmail() + "," + user.getPassword() + "," + user.getAvatar());
         
     }
 }

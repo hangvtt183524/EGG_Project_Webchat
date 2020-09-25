@@ -15,10 +15,11 @@
   <script type="text/javascript" src="loadMess.js"></script>
 </head>
 <body>
+    <div id="testagain"></div>
     <div class="container-fluid">
          <div class="row">
             <div class="col-3 left-head">
-                <button class="avatar01"><img src="store/image/room-img/room-59.png" data-toggle="modal" data-target="#myModal3" class="rounded-circle my-avatar"></button>
+                <button class="avatar01"><img data-toggle="modal" data-target="#myModal3" class="rounded-circle my-avatar"></button>
                 <span class="name" style="color:rgb(39, 75, 173);" id="user-name"><b>Thanh</b></span>
                 <button type="button" title="mới" class="icon" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus-circle"></i></button>
                 <button id="edit" type="button" title="chỉnh sửa" class="icon"><i class="fa fa-edit"></i></button>
@@ -118,29 +119,27 @@
                                 <div class="text-center">
                                     <img id="avat" style="height: 150px; width: 150px; display: block; margin-left: auto; margin-right: auto;" class="rounded-circle my-avatar">
                                     <h6>Upload a different photo...</h6>
-                                    <input id="avat-img" type="file" class="text-center center-block file-upload">
+                                    <form method="post" action="changeInformation" enctype="multipart/form-data" id="form_uploadFileChange" target="#changeSuccess">
+                                       <input id="avat-img" type="file" name="files" class="text-center center-block file-upload" multiple>
+                                    </form>
+                                    <div id="changeSuccess"></div>
                                   </div><br>
                                
                                     <div>
-                                        <form action="##">
-                                          <label style="color: rgb(49, 113, 209);">Username</label><br>
-                                          <input style="width: 400px;" id="ip1" type="text" value="jsmith"><br>
                                           <label style="color: rgb(49, 113, 209);">First Name</label><br>
-                                          <input style="width: 400px;" id="ip2" type="text" value="John"><br>
+                                          <input style="width: 400px;" id="ip1" type="text" class="change-inform"><br>
                                           <label style="color: rgb(49, 113, 209);">Last Name</label><br>
-                                          <input style="width: 400px;" id="ip3" type="text" value="Smith"><br>
+                                          <input style="width: 400px;" id="ip2" type="text" class="change-inform"><br>
                                           <label style="color: rgb(49, 113, 209);">Email</label><br>
-                                          <input style="width: 400px;" id="ip4" type="text" value="jsmith@yourcompany.com"><br>
+                                          <input style="width: 400px;" id="ip3" type="text" class="change-inform"><br>
                                           <label style="color: rgb(49, 113, 209);">Password</label><br>
-                                          <input style="width: 400px;" id="ip5" type="text" value="Smith"><br>
-                                        </form>
+                                          <input style="width: 400px;" id="ip4" type="text" class="change-inform"><br>
                                     </div>
-                                   
                                 
                             </div>
                     <!-- Modal footer -->
                             <div class="modal-footer">
-                               <button type="submit" class="btn btn-primary" id="update">Update</button>
+                               <button class="btn btn-primary" id="update">Update</button>
                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                             </div>
                         </div>
@@ -303,9 +302,14 @@
                 url: 'getInformFromDB',
                 success: function(result){
                     var res = result.split(",");
-                    $('#user-name').html(res[0]);
-                    $('.rounded-circle my-avatar')[0].attr('src', res[1]);
-                    $('#avat').attr('src', res[1]);
+                    var name = res[0].split(" ");
+                    $('#user-name').html("<b>" + res[0] + "</b>");
+                    $("#ip1").attr('value', name[0]);
+                    $('#ip2').attr('value', name[1]);
+                    $('#ip3').attr('value', res[1]);
+                    $('#ip4').attr('value', res[2]);
+                    document.getElementsByClassName("rounded-circle my-avatar")[0].src = res[3];
+                    document.getElementById("avat").src = res[3];
                 }
             });
             
@@ -347,6 +351,6 @@
     <script type="text/javascript" src="uploadFile.js"></script>
 <script type="text/javascript" src="outRoom.js"></script>
 <script type="text/javascript" src="logout.js"></script>
-<script src="load.js"></script>
+<script type="text/javascript" src="changeinformation.js"></script>
 </body>
 </html>

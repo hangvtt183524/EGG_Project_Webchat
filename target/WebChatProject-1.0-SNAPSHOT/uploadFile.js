@@ -9,6 +9,12 @@
           });
       });
       
+      $(document).ready(function(){
+          $('#avat-img').on('change', function(){
+              $('#form_uploadFileChange').submit();
+          });
+      });
+      
             $(document).ready(function() {
     $('form').submit(function(event) {
         event.preventDefault();
@@ -26,8 +32,14 @@
                   setTimeout(function(){ 
                   $('#messageText').val(response);
                   $('#btn-sendMessage').click();}, 2000);
+                if (form_id == "form_uploadFileChange")
+                { 
+                    setTimeout(function(){ 
+                        document.getElementsByClassName("rounded-circle my-avatar")[0].src = response;
+                        document.getElementById("avat").src = response;
+                    }, 2000);
+                }
             }
-            
         });
  
         return false;
