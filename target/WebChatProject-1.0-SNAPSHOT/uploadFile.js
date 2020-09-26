@@ -16,7 +16,7 @@
       });
       
             $(document).ready(function() {
-    $('form').submit(function(event) {
+    $('#form_uploadFileMess').submit(function(event) {
         event.preventDefault();
         var form_id = $(this).attr("id");
         // Calling AJAX
@@ -32,16 +32,29 @@
                   setTimeout(function(){ 
                   $('#messageText').val(response);
                   $('#btn-sendMessage').click();}, 2000);
-                if (form_id == "form_uploadFileChange")
-                { 
+            }
+        });
+        return false;
+    });
+    
+    $('#form_uploadFileChange').submit(function(event) {
+        event.preventDefault();
+        var form_id = $(this).attr("id");
+        // Calling AJAX
+        $.ajax({
+            url : $(this).attr('action'),
+            type : $(this).attr('method'),
+            data : new FormData(this),
+            contentType : false,
+            cache : false,
+            processData : false,
+            success : function(response) {
                     setTimeout(function(){ 
                         document.getElementsByClassName("rounded-circle my-avatar")[0].src = response;
                         document.getElementById("avat").src = response;
                     }, 2000);
-                }
             }
         });
- 
         return false;
     });
  

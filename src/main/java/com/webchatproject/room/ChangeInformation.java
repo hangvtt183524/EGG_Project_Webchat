@@ -114,7 +114,7 @@ public class ChangeInformation extends HttpServlet {
             
             // if fileName ends with png, jpg, jiff --> image
             File f = new File(user.getAvatar());
-            f.deleteOnExit();
+            f.delete();
             if (tail1.equals("png") || tail1.equals("jpg"))
                 {
                     part.write("store\\image\\user-img\\" + user_id + "-avatar." + tail1);
