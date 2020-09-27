@@ -35,7 +35,7 @@ function addToRoom(x)
                              "<div class=\"people\" id=\"user-" + this.responseText + "\">"
                              +     "<img src=\"" + x.firstElementChild.firstElementChild.src + "\" class=\"rounded-circle my-avatar\">"
                              +     "<span class=\"name\" style=\"color:rgb(100, 100, 100);\">" + x.firstElementChild.textContent + "</span>"
-                             +     "<button type=\"button\" class=\"close\" data-dismiss=\"people\">&times;</button>"
+                             +     "<button type=\"button\" class=\"close kick\">&times;</button>"
                              + "</div>";
             }
         }

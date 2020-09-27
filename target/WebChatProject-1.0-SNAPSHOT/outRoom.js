@@ -20,9 +20,13 @@ $(document).ready(function(){
                 else 
                 {
                     $('#room-' + result).css("display", "none");
-                    $('#insert-roomName').html("");
+                    $('#insert-roomName1').html("");
                     // call function removeSocket on startChat.js
                     $('#removeSocket').click();
+                    var event1 = document.getElementById("p1");
+                    
+                    event1.classList.toggle('col-9');
+                    event1.classList.toggle('col-6');
                 }
             }
         });
@@ -42,10 +46,23 @@ $(document).ready(function(){
                 else 
                 {
                     $('#room-' + result).css("display", "none");
-                    $('#insert-roomName').html("");
+                    $('#insert-roomName1').html("");
                     $('#removeSocket').click();
+                    var event1 = document.getElementById("p1");
+                    
+                    event1.classList.toggle('col-9');
+                    event1.classList.toggle('col-6');
                 }
             }
         });
+    });
+
+});
+
+$(document).ready(function(){
+            
+    $('#try').click(function(){
+        $('#testagain').html("kickout");
+        alert("kickout");
     });
 });

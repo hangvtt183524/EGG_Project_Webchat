@@ -16,7 +16,8 @@ var text;
 
 function startChat(x)
     {
-        document.getElementById("insert-roomName").textContent = x.lastElementChild.lastElementChild.firstElementChild.firstElementChild.textContent;
+        document.getElementById("insert-roomName1").textContent = x.lastElementChild.lastElementChild.firstElementChild.firstElementChild.textContent;
+        document.getElementById("insert-roomName2").innerHTML = "<b>" + x.lastElementChild.lastElementChild.firstElementChild.firstElementChild.textContent + "</b>";
         room_id = x.id;
         
         $('#div21').hide();
@@ -93,6 +94,7 @@ function startChat(x)
                 data: {command: 'chat'},
                 url: 'getInformFromDB',
                 success: function(result){
+                    $('#mess').html("");
                     $('#mess').append(result);
                 }
             });

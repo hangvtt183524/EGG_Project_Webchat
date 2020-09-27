@@ -123,7 +123,7 @@ public class GetInformFromDB extends HttpServlet {
                 inform.append("<div class=\"people\" id=\"user-" + rs.getString("member_id") + "\">"
                              +     "<img src=\"" + rs.getString("avatar") + "\" class=\"rounded-circle my-avatar\">"
                              +     "<span class=\"name\" style=\"color:rgb(100, 100, 100);\">" + rs.getString("firstname") + " " + rs.getString("lastname") + "</span>"
-                             +     "<button type=\"button\" class=\"close\" data-dismiss=\"people\">&times;</button>"
+                             +     "<button type=\"button\" class=\"close kick\" id=\"try\">&times;</button>"
                              + "</div>");
             }
             rs.close();
@@ -160,7 +160,7 @@ public class GetInformFromDB extends HttpServlet {
                             + "<a style=\"text-decoration: none; color: rgb(100, 100, 100)\" onclick=\"startChat(this)\" id=\"" + ("room-" + rs.getString("room_id")) + "\">"
                             +     "<div style=\"display: flex;\">"
                             +         "<div style=\"height: 50px;\">"
-                            +              "<img src=\"libs/image/" + rs.getString("avatar") +  "\" class=\"rounded-circle avatar\">"
+                            +              "<img src=\"" + rs.getString("avatar") +  "\" class=\"rounded-circle avatar\">"
                             +         "</div>"
                             +         "<div style=\"margin-left: 10px;\">"
                             +              "<div style=\"height: 30px;\">"

@@ -23,7 +23,7 @@ function addNewRoom() {
                             + "<a style=\"text-decoration: none; color: rgb(100, 100, 100)\" onclick=\"startChat(this)\" id=\"" + ("room-" + this.responseText) + "\">"
                             +     "<div style=\"display: flex;\">"
                             +         "<div style=\"height: 50px;\">"
-                            +              "<img src=\"libs/image/default-avatar.png\" class=\"rounded-circle avatar\">"
+                            +              "<img src=\"store/image/room-img/default-avatar.png\" class=\"rounded-circle avatar\">"
                             +         "</div>"
                             +         "<div style=\"margin-left: 10px;\">"
                             +              "<div style=\"height: 30px;\">"
@@ -41,7 +41,7 @@ function addNewRoom() {
                             +     "</div>"
                             +  "</a>"
                             +"</li>";
-                    
+            document.getElementById("myModal").classList.toggle('modal');
         }
     }
     
