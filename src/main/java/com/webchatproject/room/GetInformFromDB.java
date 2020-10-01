@@ -123,7 +123,7 @@ public class GetInformFromDB extends HttpServlet {
                 inform.append("<div class=\"people\" id=\"user-" + rs.getString("member_id") + "\">"
                              +     "<img src=\"" + rs.getString("avatar") + "\" class=\"rounded-circle my-avatar\">"
                              +     "<span class=\"name\" style=\"color:rgb(100, 100, 100);\">" + rs.getString("firstname") + " " + rs.getString("lastname") + "</span>"
-                             +     "<button type=\"button\" class=\"close kick\" id=\"try\">&times;</button>"
+                             +     "<button type=\"button\" class=\"close kick\" onclick=\"kickout(" + rs.getString("member_id") + ")\">&times;</button>"
                              + "</div>");
             }
             rs.close();

@@ -5,6 +5,7 @@
  */
 // handle when user want to quit room
 $(document).ready(function(){
+    
     $('#quitRoom').click(function(){
         // use ajax to send command to servlet, check if this user is the room's admin or not
         $.ajax({
@@ -57,12 +58,4 @@ $(document).ready(function(){
         });
     });
 
-});
-
-$(document).ready(function(){
-            
-    $('#try').click(function(){
-        $('#testagain').html("kickout");
-        alert("kickout");
-    });
 });

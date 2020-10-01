@@ -6,15 +6,20 @@
 package com.webchatproject.chat;
 
 import Model.User;
+import com.webchatproject.connectdatabase.ConnectDatabase;
 import com.webchatproject.room.StoreMessage;
 import java.io.IOException;
 import java.io.StringWriter;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.json.Json;
 import javax.json.JsonObject;
 import javax.json.JsonWriter;
@@ -55,9 +60,28 @@ public class ChatRoomEndpoint {
     public void handleOpen (EndpointConfig config, Session userSession, @PathParam("chatroom") String chatroom)
     {
         userSession.getUserProperties().put("user", config.getUserProperties().get("user"));
-        userSession.getUserProperties().put("chatroom", chatroom);
-        Set<Session> chatroomUsers = getChatroom(chatroom);
-        chatroomUsers.add(userSession);
+        
+        
+        ConnectDatabase connect = new ConnectDatabase();
+        ResultSet rs = connect.executeSql("select member_id from Participant where room_id = " + Integer.parseInt(chatroom.substring(5)) + " ;");
+        User user = (User) config.getUserProperties().get("user");
+        
+        try {
+            while(rs.next())
+            {
+                if (Integer.parseInt(rs.getString("member_id")) == user.getUserId())
+                {
+                    userSession.getUserProperties().put("chatroom", chatroom);
+                    Set<Session> chatroomUsers = getChatroom(chatroom);
+                    chatroomUsers.add(userSession);
+                    rs.close();
+                    break;
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ChatRoomEndpoint.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         
     }
     
@@ -72,14 +96,15 @@ public class ChatRoomEndpoint {
         String avatar = user.getAvatar();
         int user_id = user.getUserId();
 
-        // form of message return to Client
+        if (!message.substring(0, 16).equals("kick_out_member-"))
+        {
+            // form of message return to Client
         String messageReturn = "<div class=\"d-flex justify-content-start mb-4\">"
                              +     "<div class=\"img_cont_msg\">"
                              +         "<img src=\"" + avatar + "\" class=\"rounded-circle user_img_msg\">"
                              +     "</div>"
                              +     "<div class=\"msg_cotainer\">"
                              +         message
-                             +         "<span class=\"msg_time\">8:40 AM, Today</span>"
                              +     "</div>"
                              + "</div>";
         // get Sessions of this chatroom (room_id)
@@ -97,7 +122,49 @@ public class ChatRoomEndpoint {
         }
         // store message into DB
         StoreMessage.store(user_id, Integer.parseInt(chatroom.substring(5)), message);
-    }
+        }
+        else
+        {
+           ConnectDatabase connect = new ConnectDatabase();
+           ResultSet rs = connect.executeSql("select * from Chat_Room where room_id = " + Integer.parseInt(chatroom.substring(5)) + " ;");
+           try 
+           {
+           if (rs.next() && Integer.parseInt(rs.getString("creator_id")) == user_id)
+           {
+               int kick_id = 0;
+            
+               Set<Session> chatroomUsers = getChatroom(chatroom);
+        
+               // loop through all Session of member of this room
+               Iterator<Session> irerator = chatroomUsers.iterator();
+               Session current;
+
+               while (irerator.hasNext())
+               {
+                    current = irerator.next();
+                    // send message to user if only they aren't message' sender
+                    if (!current.equals(userSession))
+                    {
+                        kick_id = ((User) current.getUserProperties().get("user")).getUserId();
+                        if (kick_id == Integer.parseInt(message.substring(16)))
+                        {
+                            connect.insertIntoDatabase("delete from Participant where room_id = " + Integer.parseInt(chatroom.substring(5)) + " and member_id = " + kick_id + " ;");
+                            chatroomUsers.remove(current);
+                            current.getBasicRemote().sendText(buildJsonData_kickout("user-" + message.substring(16)));
+                            break;
+                        }
+                    }
+                }
+                rs.close();
+           }
+           else rs.close();
+            } 
+            catch (SQLException ex) {
+                Logger.getLogger(ChatRoomEndpoint.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        connect.closeConnect();
+
+    }}
 
     // handle when websocket close
     @OnClose
@@ -119,6 +186,17 @@ public class ChatRoomEndpoint {
         private String buildJsonData(String messageReturn)
     {
         JsonObject jsonObject = Json.createObjectBuilder().add("message",messageReturn).build();
+        StringWriter stringWriter = new StringWriter();
+        try (JsonWriter jsonWriter = Json.createWriter(stringWriter))
+        {
+            jsonWriter.write(jsonObject);
+        }
+        return stringWriter.toString();
+    }
+        
+        private String buildJsonData_kickout(String kickout_user)
+    {
+        JsonObject jsonObject = Json.createObjectBuilder().add("kickout",kickout_user).build();
         StringWriter stringWriter = new StringWriter();
         try (JsonWriter jsonWriter = Json.createWriter(stringWriter))
         {

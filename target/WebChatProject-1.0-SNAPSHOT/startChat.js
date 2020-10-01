@@ -57,6 +57,10 @@ function startChat(x)
                         document.getElementById("mess").innerHTML += jsonData.message;
                         
                     }
+                if (jsonData.kickout !== null)
+                {
+                    removeSocket();
+                }
             };
 
            }
@@ -100,3 +104,10 @@ function startChat(x)
             });
           });
 }
+
+  function kickout(x){
+      
+        $(document).ready(function(){
+            websocket.send("kick_out_member-"+x);
+        });
+    }
