@@ -22,6 +22,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author HANG.VTT183524
  */
+// this class has method to add other people into a room
 public class AddMemberIntoRoom extends HttpServlet {
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -56,16 +57,19 @@ public class AddMemberIntoRoom extends HttpServlet {
         String member_id = ((String) request.getParameter("member_id")).substring(5);
         String room_id = (String) session.getAttribute("room_id");
         
+        // check if that user are in this room or not
         ConnectDatabase connect = new ConnectDatabase();
         ResultSet rs = connect.executeSql("select * from Participant where member_id = " + Integer.parseInt(member_id) + " and room_id = "+ Integer.parseInt(room_id) + ";");
         
         try {
             if (rs.next())
             {
+                // if this user was added before, don't add again
               out.print(false);
             }
             else 
             {
+                // on the other hand, add that user into room 
                  boolean b = connect.insertIntoDatabase("insert into Participant values ("+ Integer.parseInt(member_id) + ", "+ Integer.parseInt(room_id) + ");");
                  out.print(member_id);
             }

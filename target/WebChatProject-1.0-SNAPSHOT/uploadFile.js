@@ -3,6 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+// handle when user want to upload image of file 
       $(document).ready(function(){
           $('#upload-input').on('change', function(){
               $('#form_uploadFileMess').submit();

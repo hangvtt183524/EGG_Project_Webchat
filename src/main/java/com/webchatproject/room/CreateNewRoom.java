@@ -24,6 +24,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author HANG.VTT183524
  */
+// this class has service to make a new room 
 public class CreateNewRoom extends HttpServlet {
     
     @Override
@@ -32,6 +33,7 @@ public class CreateNewRoom extends HttpServlet {
         response.setContentType("text/plain");
         PrintWriter out = response.getWriter();
         
+        // get room-name that was inserted by user
         String roomName = (String) request.getParameter("roomName");
         if (!roomName.equals("") && roomName != null)
         {
@@ -41,6 +43,7 @@ public class CreateNewRoom extends HttpServlet {
         User creator = (User) session.getAttribute("user");
         int user_id = creator.getUserId();
         
+        // add that room-name into DB
         ConnectDatabase connect = new ConnectDatabase();
         boolean b = connect.insertIntoDatabase("insert into Chat_Room values ('" + roomName + "', " + user_id + ", null, 'store/image/room-img/default-avatar.png');");
         
@@ -48,6 +51,7 @@ public class CreateNewRoom extends HttpServlet {
         try {
             if (rs.next())
             { 
+                // add admin into DB
                 room_id = rs.getString("room_id");
                 connect.insertIntoDatabase("insert into Participant values ('" + user_id + "', " + room_id + ");");
             }

@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author HANG.VTT183524
  */
+// this class is register account service
 @WebServlet("/signupServlet")
 public class SignupServlet extends HttpServlet {
 
@@ -33,6 +34,7 @@ public class SignupServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
         String result = "";
         
+        // handle if user had wrong format when fill information
         String firstname = (String) request.getParameter("firstname");
         String lastname = (String) request.getParameter("lastname");
         String email = (String) request.getParameter("email");
@@ -57,14 +59,14 @@ public class SignupServlet extends HttpServlet {
         {
             ConnectDatabase connect = new ConnectDatabase();
             boolean check = connect.check("select * from User_Profile where email = '" + email + "' ;");
-            
+         // if account are existed, tell user to choose another email   
         if (check == true)
         {
             result = "7";
         }
         else 
         {
-                
+                // if everything is fined, add user' account to DB
                 boolean b = connect.insertIntoDatabase("insert into User_Profile values ('"+ firstname + "', '" + lastname + "', '"+ password + "', '"
                         + email + "', null, null);");
         }

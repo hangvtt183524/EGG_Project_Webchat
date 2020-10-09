@@ -57,6 +57,7 @@ function startChat(x)
                         document.getElementById("mess").innerHTML += jsonData.message;
                         
                     }
+                    // handle when user receive a kick out command
                 if (jsonData.kickout != null || jsonData.kickout != undefined)
                 {
                   alert("You are disowned from " + x.lastElementChild.lastElementChild.firstElementChild.firstElementChild.textContent);  

@@ -28,6 +28,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author HANG.VTT183524
  */
+// this class is service to get information about room (contain member, name, message,...) from DB
  @WebServlet("/getInformFromDB")
 public class GetInformFromDB extends HttpServlet {
 

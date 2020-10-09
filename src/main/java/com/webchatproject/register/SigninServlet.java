@@ -21,6 +21,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author HANG.VTT183524
  */
+// this class is login service
+// when people fill email and password, check information in DB. If true, forward to chat2.html - chat page. If not, nortify error
 @WebServlet("/login")
 public class SigninServlet extends HttpServlet {
 @Override
@@ -35,6 +37,7 @@ public class SigninServlet extends HttpServlet {
             if (user == null) 
                 request.getRequestDispatcher("signin.html").forward(request, response);
             else {
+                // check email and password in DB
                 boolean checkInfor = user.checkInfor();
                 if (checkInfor)
                 {
@@ -49,6 +52,7 @@ public class SigninServlet extends HttpServlet {
         }
         else
         {
+            // handle when user want to log out
             if (action.equalsIgnoreCase("logout"))
             {
                 session.removeAttribute("user");
@@ -70,7 +74,7 @@ public class SigninServlet extends HttpServlet {
             }
         }
     }
-    
+    // check brower cookies
      private User checkCookie(HttpServletRequest request)
      {
          Cookie[] cookie = request.getCookies();
@@ -114,12 +118,6 @@ public class SigninServlet extends HttpServlet {
             String password = (String) request.getParameter("password");
             
             boolean remember = request.getParameter("remember") != null;
-            
-        
-//       boolean check = false;        
-//        ConnectDatabase.connect();
-//        check = ConnectDatabase.check("select * from User_Profile where email = '" + email + "' and password = '" + password + "' ;");
-//        ConnectDatabase.closeConnect();
 
             User user = new User(email, password);
             boolean check = user.checkInfor();

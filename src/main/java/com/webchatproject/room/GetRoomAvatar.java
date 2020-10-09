@@ -23,6 +23,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author HANG.VTT183524
  */
+// this class gets room' avatar and add room-id into session
 public class GetRoomAvatar extends HttpServlet {
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

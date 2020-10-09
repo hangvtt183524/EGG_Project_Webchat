@@ -61,7 +61,7 @@ public class ChatRoomEndpoint {
     {
         userSession.getUserProperties().put("user", config.getUserProperties().get("user"));
         
-        
+        // only member of room that was stored in DB are added to session
         ConnectDatabase connect = new ConnectDatabase();
         ResultSet rs = connect.executeSql("select member_id from Participant where room_id = " + Integer.parseInt(chatroom.substring(5)) + " ;");
         User user = (User) config.getUserProperties().get("user");
@@ -103,6 +103,7 @@ public class ChatRoomEndpoint {
                Iterator<Session> irerator = chatroomUsers.iterator();
                Session current;
 
+               // handle when room's admin kick out a member
                if (message.contains("kick_out_member-"))
         {
         
@@ -110,13 +111,14 @@ public class ChatRoomEndpoint {
            ResultSet rs = connect.executeSql("select * from Chat_Room where room_id = " + Integer.parseInt(chatroom.substring(5)) + " ;");
            try 
            {
+               // check if kicker is creator or not
            if (rs.next() && Integer.parseInt(rs.getString("creator_id")) == user_id)
            {
                int kick_id = 0;
                while (irerator.hasNext())
                {
                     current = irerator.next();
-                    // send message to user if only they aren't message' sender
+                    // check session is not user session
                     if (!current.equals(userSession))
                     {
                         kick_id = ((User) current.getUserProperties().get("user")).getUserId();
@@ -137,6 +139,7 @@ public class ChatRoomEndpoint {
             }
         connect.closeConnect();
         }
+               // send message normally
                else
                {
              // form of message return to Client
