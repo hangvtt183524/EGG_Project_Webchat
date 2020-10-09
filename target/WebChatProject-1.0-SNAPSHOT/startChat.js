@@ -57,9 +57,10 @@ function startChat(x)
                         document.getElementById("mess").innerHTML += jsonData.message;
                         
                     }
-                if (jsonData.kickout !== null)
+                if (jsonData.kickout != null || jsonData.kickout != undefined)
                 {
-                    alert(jsonData.kickout);
+                  alert("You are disowned from " + x.lastElementChild.lastElementChild.firstElementChild.firstElementChild.textContent);  
+                removeSocket();
                 }
             };
 

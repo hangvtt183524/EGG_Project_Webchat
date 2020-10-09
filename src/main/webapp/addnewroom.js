@@ -41,7 +41,6 @@ function addNewRoom() {
                             +     "</div>"
                             +  "</a>"
                             +"</li>";
-            document.getElementById("myModal").classList.toggle('modal');
         }
     }
     

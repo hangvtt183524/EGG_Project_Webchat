@@ -7,7 +7,8 @@
 $(document).ready(function(){
     
     $('#quitRoom').click(function(){
-        if (confirm("Are you sure to quit this room?")) {
+        var c = confirm("Are you sure to quit this room?");
+        if (c == true) {
     // use ajax to send command to servlet, check if this user is the room's admin or not
         $.ajax({
             type: 'post',
@@ -41,7 +42,8 @@ $(document).ready(function(){
     
     // handle if user want to delete this room
     $('#deleteRoom').click(function(){
-        if (confirm('Are you sure to delete this conversation?'))
+        var c = confirm("Are you sure to delete this conversation??");
+        if (c == true)
         {
             $.ajax({
             type: 'post',
