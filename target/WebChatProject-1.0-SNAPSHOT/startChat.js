@@ -59,7 +59,7 @@ function startChat(x)
                     }
                 if (jsonData.kickout !== null)
                 {
-                    removeSocket();
+                    alert('kick kick kick');
                 }
             };
 
@@ -108,6 +108,8 @@ function startChat(x)
   function kickout(x){
       
         $(document).ready(function(){
+            //$('#div21').hide();
             websocket.send("kick_out_member-"+x);
+            
         });
     }

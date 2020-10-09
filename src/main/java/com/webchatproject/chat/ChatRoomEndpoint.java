@@ -74,10 +74,11 @@ public class ChatRoomEndpoint {
                     userSession.getUserProperties().put("chatroom", chatroom);
                     Set<Session> chatroomUsers = getChatroom(chatroom);
                     chatroomUsers.add(userSession);
-                    rs.close();
+                    
                     break;
                 }
             }
+            rs.close();
         } catch (SQLException ex) {
             Logger.getLogger(ChatRoomEndpoint.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -95,49 +96,25 @@ public class ChatRoomEndpoint {
         String username = user.getUsername();
         String avatar = user.getAvatar();
         int user_id = user.getUserId();
-
-        if (!message.substring(0, 16).equals("kick_out_member-"))
-        {
-            // form of message return to Client
-        String messageReturn = "<div class=\"d-flex justify-content-start mb-4\">"
-                             +     "<div class=\"img_cont_msg\">"
-                             +         "<img src=\"" + avatar + "\" class=\"rounded-circle user_img_msg\">"
-                             +     "</div>"
-                             +     "<div class=\"msg_cotainer\">"
-                             +         message
-                             +     "</div>"
-                             + "</div>";
-        // get Sessions of this chatroom (room_id)
+        
         Set<Session> chatroomUsers = getChatroom(chatroom);
         
-        // loop through all Session of member of this room
-        Iterator<Session> irerator = chatroomUsers.iterator();
-        Session current;
-        while (irerator.hasNext())
+               // loop through all Session of member of this room
+               Iterator<Session> irerator = chatroomUsers.iterator();
+               Session current;
+
+        if (message.substring(0, 16).equals("kick_out_member-"))
         {
-            current = irerator.next();
-            // send message to user if only they aren't message' sender
-            if (!current.equals(userSession))
-                 current.getBasicRemote().sendText(buildJsonData(messageReturn));
-        }
-        // store message into DB
-        StoreMessage.store(user_id, Integer.parseInt(chatroom.substring(5)), message);
-        }
-        else
-        {
-           ConnectDatabase connect = new ConnectDatabase();
+        
+        ConnectDatabase connect = new ConnectDatabase();
            ResultSet rs = connect.executeSql("select * from Chat_Room where room_id = " + Integer.parseInt(chatroom.substring(5)) + " ;");
            try 
            {
            if (rs.next() && Integer.parseInt(rs.getString("creator_id")) == user_id)
            {
                int kick_id = 0;
-            
-               Set<Session> chatroomUsers = getChatroom(chatroom);
-        
-               // loop through all Session of member of this room
-               Iterator<Session> irerator = chatroomUsers.iterator();
-               Session current;
+                   
+               
 
                while (irerator.hasNext())
                {
@@ -148,7 +125,7 @@ public class ChatRoomEndpoint {
                         kick_id = ((User) current.getUserProperties().get("user")).getUserId();
                         if (kick_id == Integer.parseInt(message.substring(16)))
                         {
-                            connect.insertIntoDatabase("delete from Participant where room_id = " + Integer.parseInt(chatroom.substring(5)) + " and member_id = " + kick_id + " ;");
+                            connect.insertIntoDatabase("delete from Participant where room_id = " + Integer.parseInt(chatroom.substring(5)) + " and member_id = " + message.substring(16) + " ;");
                             chatroomUsers.remove(current);
                             current.getBasicRemote().sendText(buildJsonData_kickout("user-" + message.substring(16)));
                             break;
@@ -157,14 +134,35 @@ public class ChatRoomEndpoint {
                 }
                 rs.close();
            }
-           else rs.close();
             } 
             catch (SQLException ex) {
                 Logger.getLogger(ChatRoomEndpoint.class.getName()).log(Level.SEVERE, null, ex);
             }
         connect.closeConnect();
-
-    }}
+        }
+        else 
+        {
+             // form of message return to Client
+        String messageReturn = "<div class=\"d-flex justify-content-start mb-4\">"
+                             +     "<div class=\"img_cont_msg\">"
+                             +         "<img src=\"" + avatar + "\" class=\"rounded-circle user_img_msg\">"
+                             +     "</div>"
+                             +     "<div class=\"msg_cotainer\">"
+                             +         message
+                             +     "</div>"
+                             + "</div>";
+        
+        while (irerator.hasNext())
+        {
+            current = irerator.next();
+            // send message to user if only they aren't message' sender
+            if (!current.equals(userSession))
+                 current.getBasicRemote().sendText(buildJsonData(messageReturn));
+        }
+        // store message into DB
+        StoreMessage.store(user_id, Integer.parseInt(chatroom.substring(5)), message);
+        }   
+    }
 
     // handle when websocket close
     @OnClose
