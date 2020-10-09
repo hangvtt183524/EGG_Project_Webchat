@@ -7,7 +7,8 @@
 $(document).ready(function(){
     
     $('#quitRoom').click(function(){
-        // use ajax to send command to servlet, check if this user is the room's admin or not
+        if (confirm("Are you sure to quit this room?")) {
+    // use ajax to send command to servlet, check if this user is the room's admin or not
         $.ajax({
             type: 'post',
             data: {command: 'quit'},
@@ -31,12 +32,18 @@ $(document).ready(function(){
                 }
             }
         });
+  } else {
+    
+  }
+        
     });
     
     
     // handle if user want to delete this room
     $('#deleteRoom').click(function(){
-        $.ajax({
+        if (confirm('Are you sure to delete this conversation?'))
+        {
+            $.ajax({
             type: 'post',
             data: {command: 'delete'},
             url: 'OutRoom',
@@ -56,6 +63,7 @@ $(document).ready(function(){
                 }
             }
         });
+        }
     });
 
 });

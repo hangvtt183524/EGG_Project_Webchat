@@ -59,7 +59,7 @@ function startChat(x)
                     }
                 if (jsonData.kickout !== null)
                 {
-                    alert('kick kick kick');
+                    alert(jsonData.kickout);
                 }
             };
 

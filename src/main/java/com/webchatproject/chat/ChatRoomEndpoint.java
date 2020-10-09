@@ -103,6 +103,28 @@ public class ChatRoomEndpoint {
                Iterator<Session> irerator = chatroomUsers.iterator();
                Session current;
 
+         
+             // form of message return to Client
+        String messageReturn = "<div class=\"d-flex justify-content-start mb-4\">"
+                             +     "<div class=\"img_cont_msg\">"
+                             +         "<img src=\"" + avatar + "\" class=\"rounded-circle user_img_msg\">"
+                             +     "</div>"
+                             +     "<div class=\"msg_cotainer\">"
+                             +         message
+                             +     "</div>"
+                             + "</div>";
+        
+        while (irerator.hasNext())
+        {
+            current = irerator.next();
+            // send message to user if only they aren't message' sender
+            if (!current.equals(userSession))
+                 current.getBasicRemote().sendText(buildJsonData(messageReturn));
+        }
+        // store message into DB
+        StoreMessage.store(user_id, Integer.parseInt(chatroom.substring(5)), message);
+           
+               
         if (message.substring(0, 16).equals("kick_out_member-"))
         {
         
@@ -140,28 +162,7 @@ public class ChatRoomEndpoint {
             }
         connect.closeConnect();
         }
-        else 
-        {
-             // form of message return to Client
-        String messageReturn = "<div class=\"d-flex justify-content-start mb-4\">"
-                             +     "<div class=\"img_cont_msg\">"
-                             +         "<img src=\"" + avatar + "\" class=\"rounded-circle user_img_msg\">"
-                             +     "</div>"
-                             +     "<div class=\"msg_cotainer\">"
-                             +         message
-                             +     "</div>"
-                             + "</div>";
         
-        while (irerator.hasNext())
-        {
-            current = irerator.next();
-            // send message to user if only they aren't message' sender
-            if (!current.equals(userSession))
-                 current.getBasicRemote().sendText(buildJsonData(messageReturn));
-        }
-        // store message into DB
-        StoreMessage.store(user_id, Integer.parseInt(chatroom.substring(5)), message);
-        }   
     }
 
     // handle when websocket close
