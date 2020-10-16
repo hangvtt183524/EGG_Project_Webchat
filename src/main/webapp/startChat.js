@@ -58,7 +58,7 @@ function startChat(x)
                         
                     }
                     // handle when user receive a kick out command
-                if (jsonData.kickout != null || jsonData.kickout != undefined)
+                if (jsonData.kickout != null)
                 {
                   alert("You are disowned from " + x.lastElementChild.lastElementChild.firstElementChild.firstElementChild.textContent);  
                 removeSocket();
